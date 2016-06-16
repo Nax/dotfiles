@@ -5,7 +5,7 @@
 shopt -s nullglob
 
 cd "$DOTFILES_ROOT"
-git pull
+git pull -f >/dev/null
 
 cd "$DOTFILES_ROOT/dotfiles"
 
