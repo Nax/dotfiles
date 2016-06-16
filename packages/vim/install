@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+simple_install "vimrc" ".vimrc"
+simple_install "vimrc" ".config/nvim/init.vim"

@@ -10,6 +10,12 @@ register_link() {
 simple_install() {
     local src="$1"
     local dst="$2"
+    local src_dir=$(dirname "$DOTFILES_PACKAGE_ROOT/$dst")
+    local dst_dir=$(dirname "$HOME/$dst")
+
+    [ ! -e "$src_dir" ] && mkdir -p "$src_dir"
+    [ ! -e "$dst_dir" ] && mkdir -p "$dst_dir"
+
     cp "$src" "$DOTFILES_PACKAGE_ROOT/$dst"
     rm -rf "$HOME/$dst"
     ln -s "$DOTFILES_PACKAGE_ROOT/$dst" "$HOME/$dst"

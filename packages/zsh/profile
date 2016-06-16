@@ -1,4 +1,4 @@
-_load_sysroot() {
+load_sysroot() {
     [ -e "$1/bin" ] && export PATH="$1/bin:$PATH"
     [ -e "$1/sbin" ] && export PATH="$1/sbin:PATH" 
     [ -e "$1/lib" ] && export LIBRARY_PATH="$1/lib:$LIBRARY_PATH"
@@ -6,20 +6,26 @@ _load_sysroot() {
     [ -e "$1/share/man" ] && export MANPATH="$1/share/man:$MANPATH"
 }
 
-_load_path() {
+load_path() {
     [ -e "$1" ] && export PATH="$1:$PATH"
 }
 
-_load_sysroot /usr/local
-_load_path "$HOME/.rbenv/bin"
+load_env() {
+    if [ -e "$HOME/.$1/bin" ]; then
+        load_path "$HOME/.$1/bin"
+        eval "$($1 init --no-rehash - $SHELL)"
+    fi
+}
 
-# export ANYENV_ROOT=/opt/anyenv
-# eval "$(anyenv init - $SHELL)"
-eval "$(rbenv init - $SHELL)"
+load_sysroot /usr/local
 
-_load_path "$HOME/.bin"
-_load_path "$HOME/bin"
+load_env rbenv
+load_env nodenv
+load_env crenv
 
-unset -f _load_sysroot
-unset -f _load_path
+load_path "$HOME/.bin"
+load_path "$HOME/bin"
 
+unset -f load_sysroot
+unset -f load_path
+unset -f load_env
