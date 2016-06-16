@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+# Usage: Display informations about this software
+
+shopt -s nullglob
+
+echo "Dotfiles"
+echo "Available commands:"
+
+pushd "$DOTFILES_ROOT/libexec"
+
+for f in dotfiles-*; do
+    [ "$(echo $f | cut -c 10-10)" = "-" ] && continue 
+    cmd=$(echo "$f" | cut -c 10-)
+    usage=$(grep -m 1 '# Usage:' "$f" | cut -c 10-)
+    printf "    %-20s %s\n" "$cmd" "$usage"
+done
+
+popd

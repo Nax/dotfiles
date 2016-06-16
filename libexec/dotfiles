@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+shopt -s nullglob
+
+pushd() {
+    command pushd "$@" >/dev/null
+}
+
+popd() {
+    command popd "$@" >/dev/null
+}
+
+export -f pushd
+export -f popd
+
+exec_cmd() {
+    local cmd="$1"
+    local path="$DOTFILES_ROOT/libexec/dotfiles-$cmd"
+    if [ -e "$path" ]; then
+        shift
+        command -- "$path" "$@"
+    else
+        echo "dotfiles: command not found: $cmd"
+        exit 1
+    fi
+}
+
+DOTFILES_CMD="$0"
+export DOTFILES_CMD
+DOTFILES_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
+export DOTFILES_ROOT
+
+mkdir -p "$DOTFILES_ROOT/dotfiles"
+
+if [ "$#" = "0" ]; then
+    exec_cmd "help"
+else
+    exec_cmd "$@"
+fi
