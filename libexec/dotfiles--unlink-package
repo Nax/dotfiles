@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+package="$1"
+package_root="$DOTPACK_ROOT/dotfiles/$package"
+[ -e "$package_root/.links" ] || exit
+< "$package_root/.links" while read -r line; do
+    rm -rf "$line"
+done
+rm -rf "$package_root/.links"

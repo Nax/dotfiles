@@ -1,3 +1,22 @@
 #!/usr/bin/env bash
 
+register_link() {
+    local l="$1"
+    local linkfile="$DOTFILES_PACKAGE_ROOT/.links"
+    touch "$linkfile"
+    grep -Fxq "$l" "$linkfile" || echo "$l" >> "$linkfile"
+}
+
+simple_install() {
+    local src="$1"
+    local dst="$2"
+    cp "$src" "$DOTFILES_PACKAGE_ROOT/$dst"
+    rm -rf "$HOME/$dst"
+    ln -s "$DOTFILES_PACKAGE_ROOT/$dst" "$HOME/$dst"
+    register_link "$HOME/$dst"
+}
+
+export -f register_link
+export -f simple_install
+
 command -- "$1"

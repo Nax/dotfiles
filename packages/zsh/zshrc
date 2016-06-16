@@ -1,0 +1,82 @@
+# A good zsh config
+
+# Tmux
+# If we're not inside tmux, then start tmux
+if command -v tmux>/dev/null; then
+    if [[ ! $TERM =~ screen ]] && [ -z $TMUX ]; then
+        if tmux ls | grep -vq attached; then
+            exec tmux attach
+        else
+            exec tmux
+        fi
+    fi
+fi
+
+# Modules
+autoload -Uz colors && colors
+autoload -Uz compinit && compinit
+autoload -Uz vcs_info
+
+# VCS
+zstyle ':vcs_info:*' enable git svn
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:git*' formats ' [%F{yellow}%b %m%u%c%F{white}]'
+zstyle ':vcs_info:git*' actionformats ' [%F{yellow}%b %m%u%c (%a)%F{white}]'
+
+precmd() {
+    vcs_info
+}
+
+# General Options
+setopt NULLGLOB
+setopt AUTO_CD
+setopt PROMPT_SUBST
+
+# History
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=10000
+SAVEHIST=10000
+
+setopt EXTENDED_HISTORY
+setopt HIST_VERIFY
+setopt HIST_IGNORE_DUPS
+setopt APPEND_HISTORY
+setopt SHARE_HISTORY
+setopt INC_APPEND_HISTORY
+setopt HIST_REDUCE_BLANKS
+setopt HIST_IGNORE_SPACE
+
+# Prompt
+if [ "$EUID" = 0 ]; then
+    user_color="red"
+else
+    user_color="green"
+fi
+
+PROMPT="%B%F{$user_color}%n%F{white}@%F{blue}%m%F{white} [%F{magenta}%5~%F{white}]\${vcs_info_msg_0_} %# %b%f"
+RPROMPT="%(?..%B%F{white}%K{red} %? %b%f%k)"
+ZLE_RPROMPT_INDENT=-1
+
+# Misc
+export CLICOLOR=1
+
+export PAGER=less
+export VISUAL=vim
+export EDITOR="$VISUAL"
+
+# Functions
+git_current_branch() {
+    git symbolic-ref -q HEAD 2>/dev/null || return 1 | sed -e 's|^refs/heads/||'
+}
+
+# Aliases
+
+alias l="ls -la"
+alias ggpush='git push -u origin $(git_current_branch)'
+alias ggpull='git pull origin $(git_current_branch)'
+
+alias sudo="sudo "
+alias subl="'/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl'"
+
+# Bind
+bindkey -e

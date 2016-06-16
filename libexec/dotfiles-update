@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# Usage: Updates dotfiles and installed packages
+
+shopt -s nullglob
+
+cd "$DOTFILES_ROOT"
+git pull
+
+cd "$DOTFILES_ROOT/dotfiles"
+
+for p in *; do
+    command -- "$DOTFILES_ROOT/libexec/dotfiles--install-package" "$p"
+done

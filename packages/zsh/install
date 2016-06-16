@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 
-echo "LOL"
+simple_install  "zshrc"     ".zshrc"
+simple_install  "zprofile"  ".zprofile"
+simple_install  "profile"   ".profile"
