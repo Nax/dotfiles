@@ -1,2 +1,2 @@
+typeset -aU path
 [ -e "$HOME/.profile" ] && source "$HOME/.profile"
-

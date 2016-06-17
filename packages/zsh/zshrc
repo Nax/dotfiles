@@ -12,6 +12,14 @@ if command -v tmux>/dev/null; then
     fi
 fi
 
+# RTUN
+if command -v 'reattach-to-user-namespace' >/dev/null; then
+    if [ -z "$REATTACH_TO_USER_NAMESPACE" ]; then
+        export REATTACH_TO_USER_NAMESPACE=1
+        exec reattach-to-user-namespace zsh
+    fi
+fi
+
 # Modules
 autoload -U colors && colors
 autoload -U compinit && compinit -u
