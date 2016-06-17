@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+simple_install  "gitconfig"     ".gitconfig"
+
+touch "$HOME/.gitconfig.local"
