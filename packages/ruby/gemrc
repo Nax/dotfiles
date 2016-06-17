@@ -1,0 +1,9 @@
+# Gemrc
+---
+gem: --no-document
+verbose: true
+update_sources: true
+sources:
+ - https://rubygems.org
+backtrace: true
+bulk_threshold: 1000
