@@ -2,12 +2,9 @@
 
 simple_install "vimrc" ".vimrc"
 
-for f in vimrc.d/*.vim; do
-    simple_install "$f" ".vim/$f"
-done
-
 rm -rf "$HOME/.config/nvim/init.vim"
 rm -rf "$HOME/.config/nvim"
 
 ln -s "$HOME/.vim" "$HOME/.config/nvim"
 ln -s "$HOME/.vimrc" "$HOME/.config/nvim/init.vim"
+
