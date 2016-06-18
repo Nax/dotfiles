@@ -6,27 +6,29 @@ if [ "$#" = "0" ]; then
     echo "usage:"
     echo "  $DOTFILES_CMD install -l"
     echo "  $DOTFILES_CMD install -L"
+    echo "  $DOTFILES_CMD install -a"
     echo "  $DOTFILES_CMD install <package> ..."
     exit
 fi
 
-packages=""
+packages=()
 list=false
 list_installed=false
+all=false
 
 while [ ! "$#" = "0" ]; do
     case "$1" in
-    -l)
+    -l|--list)
         list=true ;;
-    -L)
+    -L|--installed)
         list_installed=true ;;
+    -a|--all)
+        all=true ;;
     *)
-        packages="$1 $packages" ;;
+        packages+=("$1") ;;
     esac
     shift
 done
-
-packages=$(echo -n $packages)
 
 if $list && $list_installed; then
     echo "error: can't use -l along with -L"
@@ -51,6 +53,18 @@ if $list; then
     exit
 fi
 
-for p in $packages; do
+if $all; then
+    packages=()
+    echo "Installing every package"
+    pushd "$DOTFILES_ROOT/packages"
+    for f in *; do
+        [ -e "$f/install" ] && packages+=("$f")
+    done
+    popd
+fi
+
+for p in ${packages[@]}; do
+    echo "Installing package $p"
     command -- "$DOTFILES_ROOT/libexec/dotfiles--install-package" "$p"
 done
+
