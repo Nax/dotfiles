@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+simple_install "agignore" ".agignore"
+

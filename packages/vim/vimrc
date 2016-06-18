@@ -27,35 +27,61 @@ endif
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'justinmk/vim-syntax-extra'
+Plug 'ctrlpvim/ctrlp.vim'
 call plug#end()
 " }}}
 
 " Config {{{
 set nocompatible
+let mapleader=","
 set backspace=indent,eol,start
 syn on
 set number
 set mouse=a
+set cursorline
+set wildmenu
+set showmatch
+set incsearch
+set hlsearch
+nnoremap <silent> <Leader><Space> :nohlsearch<CR>
 set tabstop=4
+set softtabstop=4
 set shiftwidth=4
 set expandtab
-set foldmethod=marker
 filetype plugin indent on
-
-" Folds
-vnoremap <Space> zf
-nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
-
-map <Tab> :NERDTreeToggle<CR>
+set foldenable
+set foldmethod=marker
+nnoremap <Space> za
+noremap <silent> <Tab> :NERDTreeToggle<CR>
 set background=dark
 silent! colo xoria256
+
+if !exists("*ReloadConfig")
+    function! ReloadConfig()
+        silent ! dotfiles update
+        so $MYVIMRC
+    endfunction
+    command! ReloadConfig   :call ReloadConfig()
+endif
+
+" CtrlP settings
+let g:ctrlp_match_window = 'bottom,order:ttb'
+let g:ctrlp_switch_buffer = 0
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_extensions = ['buffertag', 'tag', 'line', 'dir']
+
+" Ag
+if executable('ag')
+    let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+    let g:ctrlp_use_caching=0
+    let grepprg = 'ag --nogroup --nocolor --hidden'
+endif
 " }}}
 
 " Airline {{{
-let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts=1
 set laststatus=2
 set noshowmode
-set timeoutlen=10
 " }}}
 
 " Completion {{{
