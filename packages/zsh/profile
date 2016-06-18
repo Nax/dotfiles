@@ -1,3 +1,8 @@
+# Locale
+export LANG="en_US.UTF-8"
+export LANGUAGE="$LANG"
+export LC_ALL="$LANG"
+
 if [ -x /usr/libexec/path_helper ]; then
   PATH=""
   eval `/usr/libexec/path_helper -s`
