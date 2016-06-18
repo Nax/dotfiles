@@ -1,3 +1,7 @@
+" No Compatible{{{
+set nocp
+" }}}
+
 " Vim-plug {{{
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -28,11 +32,11 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'justinmk/vim-syntax-extra'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'rking/ag.vim'
 call plug#end()
 " }}}
 
 " Config {{{
-set nocompatible
 let mapleader=","
 set backspace=indent,eol,start
 syn on
@@ -43,7 +47,6 @@ set wildmenu
 set showmatch
 set incsearch
 set hlsearch
-nnoremap <silent> <Leader><Space> :nohlsearch<CR>
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
@@ -82,7 +85,23 @@ if executable('ag')
     let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
     let g:ctrlp_use_caching=0
     let grepprg = 'ag --nogroup --nocolor --hidden'
+    nnoremap <Leader>a :Ag<Space>
+    nnoremap K :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
+else
+    nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>g
 endif
+
+" Mappings
+noremap <silent> <Leader><Space> :nohlsearch<CR>
+
+noremap <silent> > :tabn<CR>
+noremap <silent> < :tabp<CR>
+
+map <silent> <Leader><Left>             <C-W><Left>
+map <silent> <Leader><Right>            <C-W><Right>
+map <silent> <Leader><Down>             <C-W><Down>
+map <silent> <Leader><Up>               <C-W><Up>
+
 " }}}
 
 " Airline {{{
