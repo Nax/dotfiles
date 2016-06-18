@@ -56,6 +56,13 @@ noremap <silent> <Tab> :NERDTreeToggle<CR>
 set background=dark
 silent! colo xoria256
 
+" Backups
+set backup
+set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set backupskip=/tmp/*,/private/tmp/*
+set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set writebackup
+
 if !exists("*ReloadConfig")
     function! ReloadConfig()
         silent ! dotfiles update
@@ -101,3 +108,15 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 " }}}
 
+" File Types {{{
+augroup filetypes
+    autocmd!
+    autocmd VimEnter * highlight clear SignColumn
+
+    autocmd FileType ruby setlocal tabstop=2
+    autocmd FileType ruby setlocal shiftwidth=2
+    autocmd FileType ruby setlocal softtabstop=2
+    autocmd FileType ruby setlocal commentstring=#\ %s
+    autocmd BufEnter Makefile setlocal noexpandtab
+augroup END
+" }}}
