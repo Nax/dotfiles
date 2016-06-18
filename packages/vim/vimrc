@@ -19,6 +19,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'vim-scripts/xoria256.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'scrooloose/nerdtree'
+Plug 'editorconfig/editorconfig-vim'
 Plug 'neomake/neomake'
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
