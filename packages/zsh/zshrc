@@ -110,6 +110,7 @@ alias l="ls -la"
 alias ggpush='git push -u origin $(git_current_branch)'
 alias ggpull='git pull origin $(git_current_branch)'
 alias gs="git status -s"
+alias g="git"
 
 alias bupdate="brew update && brew upgrade --all && brew cleanup"
 

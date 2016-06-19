@@ -1,4 +1,5 @@
 .git
 !.git/hooks
 .git/hooks/*.sample
+tags
 

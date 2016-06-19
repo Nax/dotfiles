@@ -33,6 +33,7 @@ Plug 'honza/vim-snippets'
 Plug 'justinmk/vim-syntax-extra'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'rking/ag.vim'
+Plug 'craigemery/vim-autotag'
 call plug#end()
 " }}}
 
