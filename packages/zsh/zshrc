@@ -1,6 +1,4 @@
-# A good zsh config
-
-# Tmux
+# {{{ Tmux
 # If we're not inside tmux, then start tmux
 if command -v tmux>/dev/null; then
     if [[ ! $TERM =~ screen ]] && [ -z $TMUX ]; then
@@ -11,45 +9,33 @@ if command -v tmux>/dev/null; then
         fi
     fi
 fi
+# }}}
 
-# RTUN
+# User Namespace {{{
 if command -v 'reattach-to-user-namespace' >/dev/null; then
     if [ -z "$REATTACH_TO_USER_NAMESPACE" ]; then
         export REATTACH_TO_USER_NAMESPACE=1
         exec reattach-to-user-namespace zsh
     fi
 fi
+# }}}
 
-# Modules
+# Modules {{{
 autoload -U colors && colors
 autoload -U compinit && compinit -u
 autoload -Uz vcs_info
+# }}}
 
-# Dotfiles
+# Dotfiles {{{
 if [ -e "$HOME/.dotfiles/bin" ]; then
     export PATH="$HOME/.dotfiles/bin:$PATH"
 fi
+# }}}
 
-# VCS
-zstyle ':vcs_info:*' enable git svn
-zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:git*' formats ' [%F{yellow}%b %m%u%c%F{white}]'
-zstyle ':vcs_info:git*' actionformats ' [%F{yellow}%b %m%u%c (%a)%F{white}]'
-
-precmd() {
-    vcs_info
-}
-
-# General Options
+# Options & History {{{
 setopt NULLGLOB
-setopt AUTO_CD
+setopt AUTOCD
 setopt PROMPT_SUBST
-
-# History
-HISTFILE="$HOME/.zsh_history"
-HISTSIZE=10000
-SAVEHIST=10000
-
 setopt EXTENDED_HISTORY
 setopt HIST_VERIFY
 setopt HIST_IGNORE_DUPS
@@ -59,18 +45,46 @@ setopt INC_APPEND_HISTORY
 setopt HIST_REDUCE_BLANKS
 setopt HIST_IGNORE_SPACE
 
-# Prompt
+# History
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=10000
+SAVEHIST=10000
+
+# Bind
+bindkey -e
+# }}}
+
+# Prompt {{{
+#plr=$(echo -n "\ue0b0")
+#plrs=$(echo -n "\ue0b1")
+#pll=$(echo -n "\ue0b2")
+#plls=$(echo -n "\ue0b3")
+
 if [ "$EUID" = 0 ]; then
     user_color="red"
 else
     user_color="green"
 fi
 
-PROMPT="%B%F{$user_color}%n%F{white}@%F{blue}%m%F{white} [%F{magenta}%5~%F{white}]\${vcs_info_msg_0_} %# %b%f"
-RPROMPT="%(?..%B%F{white}%K{red} %? %b%f%k)"
-ZLE_RPROMPT_INDENT=-1
+precmd() {
+    vcs_segment=""
+    local git_branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+    if [ ! -z "$git_branch" ]; then
+        vcs_segment="$git_branch"
+        local git_status=$(git status --porcelain)
+        if [ ! -z "$git_status" ]; then
+            vcs_segment="$vcs_segment*"
+        fi
+        vcs_segment=" %F{yellow}$vcs_segment"
+    fi
+}
 
-# Misc
+PROMPT="%B%F{$user_color}%n%F{white}@%F{blue}%m %F{magenta}%5~\${vcs_segment}%F{white} %# %b%f%k"
+RPROMPT="%(?..%B%F{white}%K{196} %? %b%f%k)"
+ZLE_RPROMPT_INDENT=-1
+# }}}
+
+# Misc {{{
 
 find_variant() {
     for p in "$@"; do
@@ -82,26 +96,23 @@ find_variant() {
 }
 
 export CLICOLOR=1
-
 export PAGER=$(find_variant most less more)
 export VISUAL=$(find_variant nvim vim vi)
 export EDITOR="$VISUAL"
+# }}}
 
-# Functions
+# Functions & Aliases {{{
 git_current_branch() {
     git symbolic-ref -q HEAD 2>/dev/null || return 1 | sed -e 's|^refs/heads/||'
 }
 
-# Aliases
-
 alias l="ls -la"
 alias ggpush='git push -u origin $(git_current_branch)'
 alias ggpull='git pull origin $(git_current_branch)'
+alias gs="git status -s"
 
-alias bbrew="brew update && brew upgrade --all && brew cleanup"
+alias bupdate="brew update && brew upgrade --all && brew cleanup"
 
 alias sudo="sudo "
 alias subl="'/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl'"
-
-# Bind
-bindkey -e
+# }}}
