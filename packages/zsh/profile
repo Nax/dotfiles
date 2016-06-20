@@ -33,6 +33,10 @@ for e in .*env; do
     fi
 done
 
+for f in /opt/cross/*/bin; do
+    load_path "$f"
+done
+
 load_path "$HOME/.bin"
 load_path "$HOME/bin"
 
