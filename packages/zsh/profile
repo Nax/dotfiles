@@ -3,6 +3,11 @@ export LANG="en_US.UTF-8"
 export LANGUAGE="$LANG"
 export LC_ALL="$LANG"
 
+# env reset
+unset CPATH
+unset LIBRARY_PATH
+unset MANPATH
+
 if [ -x /usr/libexec/path_helper ]; then
   PATH=""
   eval `/usr/libexec/path_helper -s`
@@ -12,8 +17,14 @@ load_sysroot() {
     [ -e "$1/bin" ] && export PATH="$1/bin:$PATH"
     [ -e "$1/sbin" ] && export PATH="$1/sbin:$PATH" 
     [ -e "$1/lib" ] && export LIBRARY_PATH="$1/lib:$LIBRARY_PATH"
-    [ -e "$1/include" ] && export CPATH="$1/include:$CPATH"
     [ -e "$1/share/man" ] && export MANPATH="$1/share/man:$MANPATH"
+    if [ -e "$1/include" ]; then
+        if [ -z "$CPATH" ]; then
+            export CPATH="$1/include"
+        else
+            export CPATH="$1/include:$CPATH"
+        fi
+    fi
 }
 
 load_path() {
