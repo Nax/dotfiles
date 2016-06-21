@@ -3,9 +3,9 @@
 if command -v tmux>/dev/null; then
     if [[ ! $TERM =~ screen ]] && [ -z $TMUX ]; then
         if tmux ls | grep -vq attached; then
-            exec tmux attach
+            exec tmux -2 attach
         else
-            exec tmux
+            exec tmux -2
         fi
     fi
 fi

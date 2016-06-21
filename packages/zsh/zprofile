@@ -1,2 +1,3 @@
 typeset -aU path
+set -o nullglob
 [ -e "$HOME/.profile" ] && source "$HOME/.profile"

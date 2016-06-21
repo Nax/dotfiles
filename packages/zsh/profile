@@ -10,7 +10,7 @@ fi
 
 load_sysroot() {
     [ -e "$1/bin" ] && export PATH="$1/bin:$PATH"
-    [ -e "$1/sbin" ] && export PATH="$1/sbin:PATH" 
+    [ -e "$1/sbin" ] && export PATH="$1/sbin:$PATH" 
     [ -e "$1/lib" ] && export LIBRARY_PATH="$1/lib:$LIBRARY_PATH"
     [ -e "$1/include" ] && export CPATH="$1/include:$CPATH"
     [ -e "$1/share/man" ] && export MANPATH="$1/share/man:$MANPATH"
