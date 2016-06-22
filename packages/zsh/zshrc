@@ -106,7 +106,14 @@ git_current_branch() {
     git symbolic-ref -q HEAD 2>/dev/null || return 1 | sed -e 's|^refs/heads/||'
 }
 
-alias l="ls -la"
+ls_default="ls"
+
+if ls --color &> /dev/null; then
+    ls_default="$ls_default --color"
+    alias ls="$ls_default"
+fi
+
+alias l="$ls_default -la"
 alias ggpush='git push -u origin $(git_current_branch)'
 alias ggpull='git pull origin $(git_current_branch)'
 alias gs="git status -s"
@@ -116,4 +123,6 @@ alias bupdate="brew update && brew upgrade --all && brew cleanup"
 
 alias sudo="sudo "
 alias subl="'/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl'"
+
+unset ls_default
 # }}}
