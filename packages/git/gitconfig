@@ -1,7 +1,7 @@
 [core]
     excludesfile = "$HOME/.gitignore"
 [credential]
-    helper = store
+    helper = "cache --timeout 7200"
 [rerere]
     enabled = 1
     autoupdate = 1
