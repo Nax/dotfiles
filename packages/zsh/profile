@@ -31,18 +31,14 @@ load_path() {
     [ -e "$1" ] && export PATH="$1:$PATH"
 }
 
-load_sysroot /usr/local
-
-# Load every *env (rbenv, nodenv...)
-# The brute-force approach is probably fine
-cd
-for e in .*env; do
-    e=$(echo "$e" | cut -c 2-)
-    if [ -e "$HOME/.$e/bin/$e" ]; then
-        load_path "$HOME/.$e/bin"
-        eval "$(command -- $e init --no-rehash - $SHELL)"
+load_xenv() {
+    if [ -e "$1" ]; then
+        load_path "$1/bin"
+        eval "$(xenv init - $SHELL)"
     fi
-done
+}
+
+load_sysroot /usr/local
 
 for f in /opt/cross/*/bin; do
     load_path "$f"
@@ -51,5 +47,10 @@ done
 load_path "$HOME/.bin"
 load_path "$HOME/bin"
 
+load_xenv "/opt/xenv"
+load_xenv "$HOME/.xenv"
+
 unset -f load_sysroot
 unset -f load_path
+unset -f load_xenv
+
