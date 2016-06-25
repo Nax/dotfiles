@@ -1,0 +1,177 @@
+# Nethackrc
+# Nax's config
+# Inspired by https://github.com/Tolchi/dotfile/blob/master/nethackrc
+
+# General config {{{
+OPTIONS=name:Nax
+OPTIONS=hilite_pet
+OPTIONS=pettype:cat
+OPTIONS=catname:Poutu
+OPTIONS=dogname:Beowulf
+OPTIONS=horsename:Findus
+OPTIONS=fruit:watermelon
+OPTIONS=autopickup,pickup_types:$?!/=
+OPTIONS=disclose:+i+a+g+c+v
+OPTIONS=!cmdassist,!help,!legacy,!news,suppress_alert:3.4.3
+OPTIONS=autodig,prayconfirm,!lootabc
+OPTIONS=msg_window:reverse,msghistory:2000
+OPTIONS=lit_corridor,color
+OPTIONS=showexp,showscore,time
+OPTIONS=runmode:teleport,!rest_on_space
+OPTIONS=number_pad:0,boulder:0
+OPTIONS=pickup_burden:unencumbered
+OPTIONS=sortloot:loot:all
+OPTIONS=scores:10 top/3 around/own
+OPTIONS=eight_bit_tty
+OPTIONS=standout
+OPTIONS=use_darkgray
+OPTIONS=fullscreen
+OPTIONS=menucolors
+# }}}
+
+# BUC {{{
+MENUCOLOR=" !C"=white
+MENUCOLOR=" !B"=white
+MENUCOLOR=" !UC"=white
+MENUCOLOR=" uncursed"=white
+MENUCOLOR=" ([-0-9]+:[-0-9]+)"=white 
+MENUCOLOR=" [+-][0-9]"=white
+
+MENUCOLOR=" blessed"=cyan
+MENUCOLOR=" cursed"=red
+# }}}
+
+# Potions {{{
+MENUCOLOR=" holy water"=cyan&bold
+MENUCOLOR=" blessed clear potion"=cyan&bold
+MENUCOLOR=" blessed potions? called water"=cyan&bold
+MENUCOLOR=" potions? of water named blessed"=cyan&bold
+MENUCOLOR=" potions? called water named blessed"=cyan&bold
+MENUCOLOR=" unholy water"=orange
+MENUCOLOR=" cursed clear potion"=orange
+MENUCOLOR=" cursed potions? called water"=orange
+MENUCOLOR=" potions? called water named cursed"=orange
+# }}}
+
+# Good stuff {{{
+MENUCOLOR=" bag .* holding"=magenta
+MENUCOLOR=" luckstone"=magenta
+MENUCOLOR=" wand .* wishing"= magenta
+MENUCOLOR=" magic marker"=magenta
+MENUCOLOR=" magic lamp"=magenta
+MENUCOLOR=" unicorn horn[^[]*$"=magenta
+MENUCOLOR=" tinning kit"=magenta
+MENUCOLOR=" lamp .* magic"=magenta
+MENUCOLOR=" ring .* regeneration"=magenta
+MENUCOLOR=" ring .* slow digestion"=magenta
+MENUCOLOR=" amulet .* life saving"=magenta
+# }}}
+
+# Artifacts {{{
+MENUCOLOR=" Dragonbane"=lightgreen
+MENUCOLOR=" Fire Brand"=lightgreen
+MENUCOLOR=" Frost Brand"=lightgreen
+MENUCOLOR=" Ogresmasher"=lightgreen
+MENUCOLOR=" Trollsbane"=lightgreen
+MENUCOLOR=" Werebane"=lightgreen
+
+MENUCOLOR=" Demonbane"=lightgreen
+MENUCOLOR=" Excalibur"=lightgreen
+MENUCOLOR=" Grayswandir"=lightgreen
+MENUCOLOR=" Snickersnee"=lightgreen
+MENUCOLOR=" Sunsword"=lightgreen
+
+MENUCOLOR=" Orb of Detection"=lightgreen
+MENUCOLOR=" Sceptre of Might"=lightgreen
+MENUCOLOR=" Magic Mirror of Merlin"=lightgreen
+MENUCOLOR=" Mitre of Holiness"=lightgreen
+MENUCOLOR=" Tsurugi of Muramasa"=lightgreen
+
+MENUCOLOR=" Cleaver"=lightgreen
+MENUCOLOR=" Giantslayer"=lightgreen
+MENUCOLOR=" Magicbane"=lightgreen
+MENUCOLOR=" Mjollnir"=lightgreen
+MENUCOLOR=" Vorpal Blade"=lightgreen
+
+MENUCOLOR=" Heart of Ahriman"=lightgreen
+MENUCOLOR=" Staff of Aesculapius"=lightgreen
+MENUCOLOR=" Eyes of the Overworld"=lightgreen
+MENUCOLOR=" Platinum Yendorian Express Card"=lightgreen
+MENUCOLOR=" Orb of Fate"=lightgreen
+MENUCOLOR=" Eye of the Aethiopica"=lightgreen
+
+MENUCOLOR=" Grimtooth"=lightgreen
+MENUCOLOR=" Orcrist"=lightgreen
+MENUCOLOR=" Sting"=lightgreen
+MENUCOLOR=" Stormbringer"=lightgreen
+
+MENUCOLOR=" Longbow of Diana"=lightgreen
+MENUCOLOR=" Master Key of Thievery"=lightgreen
+
+MENUCOLOR=" Bell of Opening"=magenta&bold
+MENUCOLOR=" silver bell"=magenta&bold
+MENUCOLOR=" Candelabrum of Invocation"=magenta&bold
+MENUCOLOR=" candelabrum"=magenta&bold
+MENUCOLOR=" Book of the Dead"=magenta&bold
+MENUCOLOR=" papyrus spellbook"=magenta&bold
+
+MENUCOLOR=" Amulet of Yendor named"=magenta&bold&underline
+# }}}
+
+# Bad stuff {{{
+MENUCOLOR=" loadstone"=red&underline
+MENUCOLOR=" cursed .* luckstone"=orange&underline
+# }}}
+
+# Bag of Holdings {{{
+MENUCOLOR=" bag .* tricks"=blue&underline
+MENUCOLOR=" wand .* cancellation"=blue&underline
+MENUCOLOR=" wand .* vanish"=blue&underline
+# }}}
+
+# Valuable {{{
+MENUCOLOR=" gold piece"=yellow
+MENUCOLOR=" valuable"=brown
+MENUCOLOR=" gems? .* hard"=yellow
+# }}}
+
+# Spells {{{
+MENUCOLOR=" 0%"=white
+MENUCOLOR=" [1-9]%"=cyan
+MENUCOLOR=" [12][0-9]%"=cyan
+MENUCOLOR=" [3-6][0-9]%"=yellow
+MENUCOLOR=" 7[0-5]%"=yellow
+MENUCOLOR=" 7[6-9]%"=orange
+MENUCOLOR=" 8[0-9]%"=orange
+MENUCOLOR=" 9[0-9]%"=red
+MENUCOLOR=" 100%"=red
+
+MENUCOLOR="[a-zA-Z] - [a-zA-Z ]+ [0-9]\*   [a-z]+ +[0-9]+%"=magenta
+# }}}
+
+# Shop {{{
+MENUCOLOR=" (unpaid, [0-9]+ zorkmids?)"=underline
+# }}}
+
+# Ehance {{{
+MENUCOLOR="^ +[a-z -]+ +\[\(Unskilled\|Basic\|Skilled\|Expert\|Master\|Grand Master\)\]$"=none 
+MENUCOLOR="^ *[a-z] - +[a-z -]+ +\[\(Unskilled\|Basic\|Skilled\|Expert\|Master\|Grand Master\)\]$"=white
+MENUCOLOR="^ +\* +[a-z -]+ +\[\(Unskilled\|Basic\|Skilled\|Expert\|Master\|Grand Master\)\]$"=white
+MENUCOLOR="^ +# +[a-z -]+ +\[\(Unskilled\|Basic\|Skilled\|Expert\|Master\|Grand Master\)\]$"=none
+# }}}
+
+# Misc. {{{
+MENUCOLOR=" (lit)"=bold
+
+MENUCOLOR=" is empty. Do what?"=none
+MENUCOLOR="Put something into .*"=none
+MENUCOLOR="Take something out of .*"=none
+
+MENUCOLOR="cancellation"=magenta&underline
+MENUCOLOR="bag"=magenta&underline
+
+MENUCOLOR="wand$"=magenta&underline
+MENUCOLOR="wand named"=magenta&underline
+MENUCOLOR="wand called"=lightmagenta&underline
+# }}}
+
