@@ -136,15 +136,15 @@ MENUCOLOR=" gems? .* hard"=yellow
 # }}}
 
 # Spells {{{
-MENUCOLOR=" 0%"=white
-MENUCOLOR=" [1-9]%"=cyan
-MENUCOLOR=" [12][0-9]%"=cyan
-MENUCOLOR=" [3-6][0-9]%"=yellow
-MENUCOLOR=" 7[0-5]%"=yellow
-MENUCOLOR=" 7[6-9]%"=orange
-MENUCOLOR=" 8[0-9]%"=orange
-MENUCOLOR=" 9[0-9]%"=red
-MENUCOLOR=" 100%"=red
+MENUCOLOR=" 0% [0-9% -]*"=white
+MENUCOLOR=" [1-9]% [0-9% -]*"=cyan
+MENUCOLOR=" [12][0-9]% [0-9% -]*"=cyan
+MENUCOLOR=" [3-6][0-9]% [0-9% -]*"=yellow
+MENUCOLOR=" 7[0-5]% [0-9% -]*"=yellow
+MENUCOLOR=" 7[6-9]% [0-9% -]*"=orange
+MENUCOLOR=" 8[0-9]% [0-9% -]*"=orange
+MENUCOLOR=" 9[0-9]% [0-9% -]*"=red
+MENUCOLOR=" 100% [0-9% -]*"=red
 
 MENUCOLOR="[a-zA-Z] - [a-zA-Z ]+ [0-9]\*   [a-z]+ +[0-9]+%"=magenta
 # }}}
