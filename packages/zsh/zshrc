@@ -55,10 +55,6 @@ bindkey -e
 # }}}
 
 # Prompt {{{
-#plr=$(echo -n "\ue0b0")
-#plrs=$(echo -n "\ue0b1")
-#pll=$(echo -n "\ue0b2")
-#plls=$(echo -n "\ue0b3")
 
 if [ "$EUID" = 0 ]; then
     user_color="red"
@@ -68,10 +64,10 @@ fi
 
 precmd() {
     vcs_segment=""
-    local git_branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+    git_branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
     if [ ! -z "$git_branch" ]; then
         vcs_segment="$git_branch"
-        local git_status=$(git status --porcelain)
+        git_status=$(git status --porcelain)
         if [ ! -z "$git_status" ]; then
             vcs_segment="$vcs_segment*"
         fi
