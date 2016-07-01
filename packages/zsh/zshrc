@@ -10,7 +10,6 @@ if command -v tmux>/dev/null; then
     fi
 fi
 # }}}
-
 # User Namespace {{{
 if command -v 'reattach-to-user-namespace' >/dev/null; then
     if [ -z "$REATTACH_TO_USER_NAMESPACE" ]; then
@@ -19,41 +18,41 @@ if command -v 'reattach-to-user-namespace' >/dev/null; then
     fi
 fi
 # }}}
-
 # Modules {{{
 autoload -U colors && colors
 autoload -U compinit && compinit -u
-autoload -Uz vcs_info
 # }}}
-
 # Dotfiles {{{
 if [ -e "$HOME/.dotfiles/bin" ]; then
     export PATH="$HOME/.dotfiles/bin:$PATH"
 fi
 # }}}
-
-# Options & History {{{
-setopt NULLGLOB
-setopt AUTOCD
-setopt PROMPT_SUBST
-setopt EXTENDED_HISTORY
-setopt HIST_VERIFY
-setopt HIST_IGNORE_DUPS
+# Options {{{
 setopt APPEND_HISTORY
-setopt SHARE_HISTORY
-setopt INC_APPEND_HISTORY
-setopt HIST_REDUCE_BLANKS
+setopt AUTOCD
+setopt AUTO_LIST
+setopt CORRECT
+setopt CORRECT_ALL
+setopt EXTENDED_HISTORY
+setopt GLOB_DOTS
+setopt HASH_LIST_ALL
+setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_SPACE
-
-# History
+setopt HIST_REDUCE_BLANKS
+setopt INC_APPEND_HISTORY
+setopt NULLGLOB
+setopt PROMPT_SUBST
+setopt PUSHD_SILENT
+setopt SHARE_HISTORY
+setopt RM_STAR_SILENT
+setopt NO_BGNICE
+setopt NO_BEEP
+# }}}
+# History {{{
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=10000
 SAVEHIST=10000
-
-# Bind
-bindkey -e
 # }}}
-
 # Prompt {{{
 
 if [ "$EUID" = 0 ]; then
@@ -79,9 +78,8 @@ PROMPT="%B%F{$user_color}%n%F{white}@%F{blue}%m %F{magenta}%5~\${vcs_segment}%F{
 RPROMPT="%(?..%B%F{white}%K{196} %? %b%f%k)"
 ZLE_RPROMPT_INDENT=-1
 # }}}
-
 # Misc {{{
-
+bindkey -e
 find_variant() {
     for p in "$@"; do
         if command -v "$p" >/dev/null 2>&1; then
@@ -96,7 +94,6 @@ export PAGER=$(find_variant most less more)
 export VISUAL=$(find_variant nvim vim vi)
 export EDITOR="$VISUAL"
 # }}}
-
 # Functions & Aliases {{{
 git_current_branch() {
     git symbolic-ref -q HEAD 2>/dev/null || return 1 | sed -e 's|^refs/heads/||'

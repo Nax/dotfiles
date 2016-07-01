@@ -1,7 +1,64 @@
 " No Compatible{{{
 set nocp
 " }}}
+" UTF-8 {{{
+set ff=unix
+set ffs=unix,dos
+if !has('nvim')
+    set encoding=utf-8
+endif
+set fenc=utf-8
+set fencs=utf-8
+" }}}
+" Common Config {{{
+filetype plugin indent on
+syn on
+set number
+set mouse=a
+set cursorline
+set wildmenu
+set showmatch
+set incsearch
+set hlsearch
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+set backspace=indent,eol,start
+set foldenable
+set foldmethod=marker
+let mapleader=","
+" }}}
+" Navigation {{{
+noremap <silent> <Leader><Space> :nohlsearch<CR>
 
+noremap <silent> > :tabn<CR>
+noremap <silent> < :tabp<CR>
+
+map <silent> <Leader><Left>             <C-W><Left>
+map <silent> <Leader><Right>            <C-W><Right>
+map <silent> <Leader><Down>             <C-W><Down>
+map <silent> <Leader><Up>               <C-W><Up>
+" }}}
+" Backups {{{
+set backup
+set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set backupskip=/tmp/*,/private/tmp/*
+set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set writebackup
+" }}}
+" File Types {{{
+augroup filetypes
+    autocmd!
+    autocmd VimEnter * highlight clear SignColumn
+
+    autocmd FileType ruby setlocal tabstop=2
+    autocmd FileType ruby setlocal shiftwidth=2
+    autocmd FileType ruby setlocal softtabstop=2
+    autocmd FileType ruby setlocal commentstring=#\ %s
+    autocmd BufEnter Makefile setlocal noexpandtab
+augroup END
+" }}}
 " Vim-plug {{{
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -9,7 +66,6 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 " }}}
-
 " Plugin Helpers {{{
 command! PU PlugUpdate | PlugUpgrade
 
@@ -17,7 +73,6 @@ function! DoRemote(arg)
   UpdateRemotePlugins
 endfunction
 " }}}
-
 " Plugins {{{
 call plug#begin('~/.vim/plugged')
 Plug 'vim-scripts/xoria256.vim'
@@ -36,81 +91,35 @@ Plug 'rking/ag.vim'
 Plug 'craigemery/vim-autotag'
 call plug#end()
 " }}}
-
-" Config {{{
-let mapleader=","
-set backspace=indent,eol,start
-syn on
-set number
-set mouse=a
-set cursorline
-set wildmenu
-set showmatch
-set incsearch
-set hlsearch
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set expandtab
-filetype plugin indent on
-set foldenable
-set foldmethod=marker
+" NERDTree {{{
 nnoremap <Space> za
 noremap <silent> <Tab> :NERDTreeToggle<CR>
-set background=dark
-silent! colo xoria256
-
-" Backups
-set backup
-set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-set backupskip=/tmp/*,/private/tmp/*
-set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-set writebackup
-
-if !exists("*ReloadConfig")
-    function! ReloadConfig()
-        silent ! dotfiles update
-        so $MYVIMRC
-    endfunction
-    command! ReloadConfig   :call ReloadConfig()
-endif
-
-" CtrlP settings
+" }}}
+" CtrlP  {{{
 let g:ctrlp_match_window = 'bottom,order:ttb'
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_extensions = ['buffertag', 'tag', 'line', 'dir']
-
-" Ag
 if executable('ag')
     let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
     let g:ctrlp_use_caching=0
+endif 
+" }}}
+" Ag {{{
+if executable('ag')
     let grepprg = 'ag --nogroup --nocolor --hidden'
     nnoremap <Leader>a :Ag<Space>
     nnoremap K :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
 else
     nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>g
 endif
-
-" Mappings
-noremap <silent> <Leader><Space> :nohlsearch<CR>
-
-noremap <silent> > :tabn<CR>
-noremap <silent> < :tabp<CR>
-
-map <silent> <Leader><Left>             <C-W><Left>
-map <silent> <Leader><Right>            <C-W><Right>
-map <silent> <Leader><Down>             <C-W><Down>
-map <silent> <Leader><Up>               <C-W><Up>
-
 " }}}
-
 " Airline {{{
-let g:airline_powerline_fonts=1
 set laststatus=2
 set noshowmode
+let g:airline_left_sep=''
+let g:airline_right_sep=''
 " }}}
-
 " Completion {{{
 let g:deoplete#enable_at_startup = 1
 " disable autocomplete
@@ -127,16 +136,16 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 " }}}
-
-" File Types {{{
-augroup filetypes
-    autocmd!
-    autocmd VimEnter * highlight clear SignColumn
-
-    autocmd FileType ruby setlocal tabstop=2
-    autocmd FileType ruby setlocal shiftwidth=2
-    autocmd FileType ruby setlocal softtabstop=2
-    autocmd FileType ruby setlocal commentstring=#\ %s
-    autocmd BufEnter Makefile setlocal noexpandtab
-augroup END
+" Xoria256 Colors {{{
+set background=dark
+silent! colo xoria256
+"}}}
+" Misc. {{{
+if !exists("*ReloadConfig")
+    function! ReloadConfig()
+        silent ! dotfiles update
+        so $MYVIMRC
+    endfunction
+    command! ReloadConfig   :call ReloadConfig()
+endif
 " }}}

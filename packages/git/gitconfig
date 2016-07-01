@@ -1,5 +1,6 @@
 [core]
     excludesfile = "$HOME/.gitignore"
+    autocrlf = input
 [credential]
     helper = "cache --timeout 7200"
 [rerere]
