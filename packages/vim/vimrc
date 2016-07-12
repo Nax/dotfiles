@@ -89,6 +89,7 @@ Plug 'justinmk/vim-syntax-extra'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'rking/ag.vim'
 Plug 'craigemery/vim-autotag'
+Plug 'majutsushi/tagbar'
 call plug#end()
 " }}}
 " NERDTree {{{
@@ -99,11 +100,11 @@ noremap <silent> <Tab> :NERDTreeToggle<CR>
 let g:ctrlp_match_window = 'bottom,order:ttb'
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_working_path_mode = 0
-let g:ctrlp_extensions = ['buffertag', 'tag', 'line', 'dir']
+let g:ctrlp_match_window = 'results:50'
 if executable('ag')
     let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
     let g:ctrlp_use_caching=0
-endif 
+endif
 " }}}
 " Ag {{{
 if executable('ag')
@@ -146,6 +147,6 @@ if !exists("*ReloadConfig")
         silent ! dotfiles update
         so $MYVIMRC
     endfunction
-    command! ReloadConfig   :call ReloadConfig()
+    command! ReloadConfig :call ReloadConfig()
 endif
 " }}}

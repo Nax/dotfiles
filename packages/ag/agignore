@@ -2,4 +2,5 @@
 !.git/hooks
 .git/hooks/*.sample
 tags
+build
 
