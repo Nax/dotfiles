@@ -11,3 +11,4 @@ mkdir -p "$HOME/.config"
 ln -s "$HOME/.vim" "$HOME/.config/nvim"
 ln -s "$HOME/.vimrc" "$HOME/.config/nvim/init.vim"
 
+simple_install "ycm_extra_conf.py" ".vim/ycm_extra_conf.py"

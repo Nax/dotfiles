@@ -13,6 +13,9 @@ if [ -x /usr/libexec/path_helper ]; then
   eval `/usr/libexec/path_helper -s`
 fi
 
+# For python
+export PYTHON_CONFIGURE_OPTS="--enable-shared"
+
 load_sysroot() {
     [ -e "$1/bin" ] && export PATH="$1/bin:$PATH"
     [ -e "$1/sbin" ] && export PATH="$1/sbin:$PATH" 

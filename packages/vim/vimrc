@@ -79,17 +79,12 @@ Plug 'vim-scripts/xoria256.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'scrooloose/nerdtree'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'neomake/neomake'
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
-endif
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
 Plug 'justinmk/vim-syntax-extra'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'rking/ag.vim'
 Plug 'craigemery/vim-autotag'
 Plug 'majutsushi/tagbar'
+Plug 'Valloric/YouCompleteMe'
 call plug#end()
 " }}}
 " NERDTree {{{
@@ -105,6 +100,11 @@ if executable('ag')
     let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
     let g:ctrlp_use_caching=0
 endif
+nnoremap <silent> <C-S-P> :CtrlPTag<CR>
+" }}}
+" Tagbar {{{
+nnoremap <silent> <F4> :TagbarToggle<CR>
+let g:tagbar_map_togglefold = '<space>'
 " }}}
 " Ag {{{
 if executable('ag')
@@ -122,20 +122,12 @@ let g:airline_left_sep=''
 let g:airline_right_sep=''
 " }}}
 " Completion {{{
-let g:deoplete#enable_at_startup = 1
-" disable autocomplete
-let g:deoplete#disable_auto_complete = 1
-if has("gui_running")
-    inoremap <silent><expr><C-Space> deoplete#mappings#manual_complete()
-else
-    inoremap <silent><expr><C-@> deoplete#mappings#manual_complete()
-endif
-
-" UltiSnips config
-inoremap <silent><expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:ycm_global_ycm_extra_conf = '~/.vim/ycm_extra_conf.py'
+let g:ycm_confirm_extra_conf = 0
+" Disable 'as-you-type' completion
+let g:ycm_auto_trigger = 0
+set completeopt-=preview
+nnoremap <silent> <F5> :YcmForceCompileAndDiagnostics<CR>
 " }}}
 " Xoria256 Colors {{{
 set background=dark
