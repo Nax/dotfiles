@@ -79,7 +79,7 @@ RPROMPT="%(?..%B%F{white}%K{196} %? %b%f%k)"
 ZLE_RPROMPT_INDENT=-1
 # }}}
 # Misc {{{
-bindkey -e
+bindkey -v
 find_variant() {
     for p in "$@"; do
         if command -v "$p" >/dev/null 2>&1; then
