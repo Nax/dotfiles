@@ -11,9 +11,9 @@ OPTIONS=dogname:Beowulf
 OPTIONS=horsename:Findus
 OPTIONS=fruit:watermelon
 OPTIONS=autopickup,pickup_types:$?!/=
-OPTIONS=disclose:+i+a+g+c+v
+OPTIONS=disclose:+i+a+g+c+v+o
 OPTIONS=!cmdassist,!help,!legacy,!news,suppress_alert:3.4.3
-OPTIONS=autodig,prayconfirm,!lootabc
+OPTIONS=autodig,!lootabc
 OPTIONS=msg_window:reverse,msghistory:2000
 OPTIONS=lit_corridor,color
 OPTIONS=showexp,showscore,time
@@ -27,20 +27,38 @@ OPTIONS=standout
 OPTIONS=use_darkgray
 OPTIONS=fullscreen
 OPTIONS=menucolors
+OPTIONS=statushilites
 # }}}
+# Status {{{
+OPTIONS=hilite_status: gold/30%/yellow/yellow
+OPTIONS=hilite_status: hitpoints/66%/orange/bright-green
+OPTIONS=hilite_status: hitpoints-max/30%/bold/bold
+OPTIONS=hilite_status: power/66%/orange/bright-green
+OPTIONS=hilite_status: power-max/30%/bold/bold
+OPTIONS=hilite_status: hunger/30%/magenta/magenta
+OPTIONS=hilite_status: carrying-capacity/30%/blue/blue
+OPTIONS=hilite_status: condition/30%/red/red
 
+OPTIONS=hilite_status: strength/updown/red/green
+OPTIONS=hilite_status: dexterity/updown/red/green
+OPTIONS=hilite_status: constitution/updown/red/green
+OPTIONS=hilite_status: intelligence/updown/red/green
+OPTIONS=hilite_status: wisdom/updown/red/green
+OPTIONS=hilite_status: charisma/updown/red/green
+
+OPTIONS=hilite_status: armor-class/30%/bright-cyan/bright-cyan
+# }}}
 # BUC {{{
 MENUCOLOR=" !C"=white
 MENUCOLOR=" !B"=white
 MENUCOLOR=" !UC"=white
 MENUCOLOR=" uncursed"=white
-MENUCOLOR=" ([-0-9]+:[-0-9]+)"=white 
+MENUCOLOR=" ([-0-9]+:[-0-9]+)"=white
 MENUCOLOR=" [+-][0-9]"=white
 
 MENUCOLOR=" blessed"=cyan
 MENUCOLOR=" cursed"=red
 # }}}
-
 # Potions {{{
 MENUCOLOR=" holy water"=cyan&bold
 MENUCOLOR=" blessed clear potion"=cyan&bold
@@ -52,7 +70,6 @@ MENUCOLOR=" cursed clear potion"=orange
 MENUCOLOR=" cursed potions? called water"=orange
 MENUCOLOR=" potions? called water named cursed"=orange
 # }}}
-
 # Good stuff {{{
 MENUCOLOR=" bag .* holding"=magenta
 MENUCOLOR=" luckstone"=magenta
@@ -66,7 +83,6 @@ MENUCOLOR=" ring .* regeneration"=magenta
 MENUCOLOR=" ring .* slow digestion"=magenta
 MENUCOLOR=" amulet .* life saving"=magenta
 # }}}
-
 # Artifacts {{{
 MENUCOLOR=" Dragonbane"=lightgreen
 MENUCOLOR=" Fire Brand"=lightgreen
@@ -117,24 +133,20 @@ MENUCOLOR=" papyrus spellbook"=magenta&bold
 
 MENUCOLOR=" Amulet of Yendor named"=magenta&bold&underline
 # }}}
-
 # Bad stuff {{{
 MENUCOLOR=" loadstone"=red&underline
 MENUCOLOR=" cursed .* luckstone"=orange&underline
 # }}}
-
 # Bag of Holdings {{{
 MENUCOLOR=" bag .* tricks"=blue&underline
 MENUCOLOR=" wand .* cancellation"=blue&underline
 MENUCOLOR=" wand .* vanish"=blue&underline
 # }}}
-
 # Valuable {{{
 MENUCOLOR=" gold piece"=yellow
 MENUCOLOR=" valuable"=brown
 MENUCOLOR=" gems? .* hard"=yellow
 # }}}
-
 # Spells {{{
 MENUCOLOR=" 0% [0-9% -]*"=white
 MENUCOLOR=" [1-9]% [0-9% -]*"=cyan
@@ -148,30 +160,50 @@ MENUCOLOR=" 100% [0-9% -]*"=red
 
 MENUCOLOR="[a-zA-Z] - [a-zA-Z ]+ [0-9]\*   [a-z]+ +[0-9]+%"=magenta
 # }}}
-
 # Shop {{{
 MENUCOLOR=" (unpaid, [0-9]+ zorkmids?)"=underline
 # }}}
-
 # Ehance {{{
-MENUCOLOR="^ +[a-z -]+ +\[\(Unskilled\|Basic\|Skilled\|Expert\|Master\|Grand Master\)\]$"=none 
+MENUCOLOR="^ +[a-z -]+ +\[\(Unskilled\|Basic\|Skilled\|Expert\|Master\|Grand Master\)\]$"=none
 MENUCOLOR="^ *[a-z] - +[a-z -]+ +\[\(Unskilled\|Basic\|Skilled\|Expert\|Master\|Grand Master\)\]$"=white
 MENUCOLOR="^ +\* +[a-z -]+ +\[\(Unskilled\|Basic\|Skilled\|Expert\|Master\|Grand Master\)\]$"=white
 MENUCOLOR="^ +# +[a-z -]+ +\[\(Unskilled\|Basic\|Skilled\|Expert\|Master\|Grand Master\)\]$"=none
 # }}}
-
-# Misc. {{{
-MENUCOLOR=" (lit)"=bold
-
-MENUCOLOR=" is empty. Do what?"=none
-MENUCOLOR="Put something into .*"=none
-MENUCOLOR="Take something out of .*"=none
-
-MENUCOLOR="cancellation"=magenta&underline
-MENUCOLOR="bag"=magenta&underline
-
-MENUCOLOR="wand$"=magenta&underline
-MENUCOLOR="wand named"=magenta&underline
-MENUCOLOR="wand called"=lightmagenta&underline
+# Symbols {{{
+SYMBOLS=S_ghost:8
 # }}}
-
+# Msgtype {{{
+# displacing pets
+MSGTYPE=hide "You displaced *"
+# items on floor
+MSGTYPE=norep "You see here a *"
+MSGTYPE=norep "You see here an *"
+# delayed instadeaths
+MSGTYPE=stop "The couatl swings itself around you!"
+MSGTYPE=stop "The electric eel swings itself around you!"
+MSGTYPE=stop "The giant eel swings itself around you!"
+MSGTYPE=stop "The kraken swings itself around you!"
+MSGTYPE=stop "The python grabs you!"
+MSGTYPE=stop "You don't feel very well."
+MSGTYPE=stop "You are turning a little green."
+MSGTYPE=stop "Your limbs are getting oozy."
+MSGTYPE=stop "Your skin begins to peel away."
+MSGTYPE=stop "You are turning into a green slime."
+MSGTYPE=stop "You are slowing down."
+MSGTYPE=stop "Your limbs are stiffening."
+MSGTYPE=stop "It constricts your throat!"
+MSGTYPE=stop "You find it hard to breathe."
+MSGTYPE=stop "You're gasping for air."
+MSGTYPE=stop "Your blood is having trouble reaching your brain."
+MSGTYPE=stop "You can no longer breathe."
+MSGTYPE=stop "You're turning blue."
+MSGTYPE=stop "Your consciousness is fading."
+MSGTYPE=stop "You feel deathly sick."
+MSGTYPE=stop "You feel much worse."
+MSGTYPE=stop "You feel even worse."
+#Things that aren't dangerous by themselves but could kill you if you don't notice.
+MSGTYPE=stop "You fail to cast the spell correctly."
+MSGTYPE=stop "You see here a cockatrice corpse."
+MSGTYPE=stop "You see here a chickatrice corpse."
+MSGTYPE=stop "You are beginning to feel weak."
+# }}}
