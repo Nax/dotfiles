@@ -10,15 +10,28 @@ OPTIONS=catname:Poutu
 OPTIONS=dogname:Beowulf
 OPTIONS=horsename:Findus
 OPTIONS=fruit:watermelon
-OPTIONS=autopickup,pickup_types:$?!/=
-OPTIONS=disclose:+i+a+g+c+v+o
-OPTIONS=!cmdassist,!help,!legacy,!news,suppress_alert:3.4.3
-OPTIONS=autodig,!lootabc
-OPTIONS=msg_window:reverse,msghistory:2000
-OPTIONS=lit_corridor,color
-OPTIONS=showexp,showscore,time
-OPTIONS=runmode:teleport,!rest_on_space
-OPTIONS=number_pad:0,boulder:0
+OPTIONS=autopickup
+OPTIONS=pickup_types:$?!/="
+OPTIONS=disclose:+i +a +g +c +v +o
+OPTIONS=!cmdassist
+OPTIONS=!help
+OPTIONS=!legacy
+OPTIONS=!news
+OPTIONS=suppress_alert:3.6.0
+OPTIONS=autodig
+OPTIONS=!lootabc
+OPTIONS=msg_window:reverse
+OPTIONS=msghistory:2000
+OPTIONS=lit_corridor
+OPTIONS=color
+OPTIONS=showexp
+OPTIONS=showscore
+OPTIONS=time
+OPTIONS=runmode:teleport
+OPTIONS=!rest_on_space
+OPTIONS=paranoid_confirmation:none
+OPTIONS=number_pad:0
+OPTIONS=boulder:0
 OPTIONS=pickup_burden:unencumbered
 OPTIONS=sortloot:loot:all
 OPTIONS=scores:10 top/3 around/own
@@ -173,12 +186,12 @@ MENUCOLOR="^ +# +[a-z -]+ +\[\(Unskilled\|Basic\|Skilled\|Expert\|Master\|Grand 
 SYMBOLS=S_ghost:8
 # }}}
 # Msgtype {{{
-# displacing pets
+# Displacing pets
 MSGTYPE=hide "You displaced *"
-# items on floor
+# Items on floor
 MSGTYPE=norep "You see here a *"
 MSGTYPE=norep "You see here an *"
-# delayed instadeaths
+# Instadeaths
 MSGTYPE=stop "The couatl swings itself around you!"
 MSGTYPE=stop "The electric eel swings itself around you!"
 MSGTYPE=stop "The giant eel swings itself around you!"
@@ -201,7 +214,7 @@ MSGTYPE=stop "Your consciousness is fading."
 MSGTYPE=stop "You feel deathly sick."
 MSGTYPE=stop "You feel much worse."
 MSGTYPE=stop "You feel even worse."
-#Things that aren't dangerous by themselves but could kill you if you don't notice.
+# Things that aren't dangerous by themselves but could kill you if you don't notice.
 MSGTYPE=stop "You fail to cast the spell correctly."
 MSGTYPE=stop "You see here a cockatrice corpse."
 MSGTYPE=stop "You see here a chickatrice corpse."
