@@ -27,8 +27,6 @@ fi
 setopt APPEND_HISTORY
 setopt AUTOCD
 setopt AUTO_LIST
-setopt CORRECT
-setopt CORRECT_ALL
 setopt EXTENDED_HISTORY
 setopt GLOB_DOTS
 setopt HASH_LIST_ALL
@@ -90,11 +88,6 @@ export PAGER=$(find_variant most less more)
 export VISUAL=$(find_variant nvim vim vi)
 export EDITOR="$VISUAL"
 # }}}
-# Functions & Aliases {{{
-git_current_branch() {
-    git symbolic-ref -q HEAD 2>/dev/null || return 1 | sed -e 's|^refs/heads/||'
-}
-
 ls_default="ls"
 
 if ls --color &> /dev/null; then
@@ -103,15 +96,25 @@ if ls --color &> /dev/null; then
 fi
 
 alias l="$ls_default -la"
-alias ggpush='git push -u origin $(git_current_branch)'
-alias ggpull='git pull origin $(git_current_branch)'
-alias gs="git status -s"
-alias g="git"
-
-alias bupdate="brew update && brew upgrade --all && brew cleanup"
-
-alias sudo="sudo "
-alias subl="'/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl'"
+alias ll="$ls_default -l"
 
 unset ls_default
+
+# Git
+alias g="git"
+alias gs="git status"
+alias gc="git commit"
+alias gcm="git commit -m"
+alias gb="git branch"
+alias gr="git rebase"
+alias gri="git rebase -i"
+alias gco="git checkout"
+alias gcb="git checkout -b"
+
+if command -v brew >/dev/null 2>&1; then
+    alias bupdate="brew update && brew upgrade --all && brew cleanup"
+fi
+
+alias sudo="sudo "
+alias env="env "
 # }}}
