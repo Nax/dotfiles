@@ -1,12 +1,8 @@
 # {{{ Tmux
 # If we're not inside tmux, then start tmux
 if command -v tmux>/dev/null; then
-    if [[ ! $TERM =~ screen ]] && [ -z $TMUX ]; then
-        if tmux ls | grep -vq attached; then
-            exec tmux -2 attach
-        else
-            exec tmux -2
-        fi
+    if [ -z $TMUX ]; then
+        exec tmux -2
     fi
 fi
 # }}}
