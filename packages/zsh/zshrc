@@ -6,6 +6,12 @@ if command -v tmux>/dev/null; then
     fi
 fi
 # }}}
+# Xenv {{{
+# We need to reload xenv
+if command -v xenv >/dev/null 2>&1; then
+    eval "$(xenv init - $SHELL)"
+fi
+# }}}
 # User Namespace {{{
 if command -v 'reattach-to-user-namespace' >/dev/null; then
     if [ -z "$REATTACH_TO_USER_NAMESPACE" ]; then
@@ -88,6 +94,7 @@ export PAGER=$(find_variant most less more)
 export VISUAL=$(find_variant nvim vim vi)
 export EDITOR="$VISUAL"
 # }}}
+# Alias {{{
 ls_default="ls"
 
 if ls --color &> /dev/null; then
