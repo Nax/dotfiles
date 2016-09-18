@@ -12,6 +12,8 @@
 [push]
     default             = current
     recurseSubmodules   = on-demand
+[merge]
+    ff                  = false
 [submodule]
     fetchJobs           = 0
 [status]
