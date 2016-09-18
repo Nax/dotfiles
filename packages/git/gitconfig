@@ -12,6 +12,8 @@
 [push]
     default             = current
     recurseSubmodules   = on-demand
+[submodule]
+    fetchJobs           = 0
 [status]
     short               = true
     showUntrackedFiles  = all
@@ -41,3 +43,5 @@
     cmd                 = "$VISUAL" -f -d -c 'wincmd l' "$LOCAL" "$MERGED" "$REMOTE"
 [include]
     path                = ~/.gitconfig.local
+[alias]
+    cloner              = "clone --recursive -j8"
