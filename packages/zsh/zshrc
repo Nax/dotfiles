@@ -97,8 +97,8 @@ export EDITOR="$VISUAL"
 # Alias {{{
 ls_default="ls"
 
-if ls --color &> /dev/null; then
-    ls_default="$ls_default --color"
+if ls --color=auto &> /dev/null; then
+    ls_default="$ls_default --color=auto"
     alias ls="$ls_default"
 fi
 
