@@ -10,8 +10,8 @@ if [ ! -e "$package_root/install" ] && [ ! -e "$DOTFILES_ROOT/dotfiles/$package"
     exit 1
 fi
 
-pushd $package_root
+pushd $package_root >/dev/null
 export DOTFILES_PACKAGE_ROOT="$DOTFILES_ROOT/dotfiles/$package"
 mkdir -p "$DOTFILES_PACKAGE_ROOT"
 command -- "$DOTFILES_ROOT/libexec/dotfiles--install-wrapper" "./install"
-popd
+popd >/dev/null

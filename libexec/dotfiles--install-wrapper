@@ -22,7 +22,4 @@ simple_install() {
     register_link "$HOME/$dst"
 }
 
-export -f register_link
-export -f simple_install
-
-command -- "$1"
+source -- "$1"

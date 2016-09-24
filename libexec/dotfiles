@@ -2,17 +2,6 @@
 
 shopt -s nullglob
 
-pushd() {
-    command pushd "$@" >/dev/null
-}
-
-popd() {
-    command popd "$@" >/dev/null
-}
-
-export -f pushd
-export -f popd
-
 exec_cmd() {
     local cmd="$1"
     local path="$DOTFILES_ROOT/libexec/dotfiles-$cmd"

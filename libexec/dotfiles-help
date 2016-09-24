@@ -7,7 +7,7 @@ shopt -s nullglob
 echo "Dotfiles"
 echo "Available commands:"
 
-pushd "$DOTFILES_ROOT/libexec"
+pushd "$DOTFILES_ROOT/libexec" >/dev/null
 
 for f in dotfiles-*; do
     [ "$(echo $f | cut -c 10-10)" = "-" ] && continue 
@@ -16,4 +16,4 @@ for f in dotfiles-*; do
     printf "    %-20s %s\n" "$cmd" "$usage"
 done
 
-popd
+popd >/dev/null

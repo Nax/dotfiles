@@ -36,31 +36,31 @@ if $list && $list_installed; then
 fi
 
 if $list_installed; then
-    pushd "$DOTFILES_ROOT/dotfiles"
+    pushd "$DOTFILES_ROOT/dotfiles" >/dev/null
     for f in *; do
         echo "  $f"
     done
-    popd
+    popd >/dev/null
     exit
 fi
 
 if $list; then
-    pushd "$DOTFILES_ROOT/packages"
+    pushd "$DOTFILES_ROOT/packages" >/dev/null
     for f in *; do
         [ -e "$f/install" ] && echo "  $f"
     done
-    popd
+    popd >/dev/null
     exit
 fi
 
 if $all; then
     packages=()
     echo "Installing every package"
-    pushd "$DOTFILES_ROOT/packages"
+    pushd "$DOTFILES_ROOT/packages" >/dev/null
     for f in *; do
         [ -e "$f/install" ] && packages+=("$f")
     done
-    popd
+    popd >/dev/null
 fi
 
 for p in ${packages[@]}; do
