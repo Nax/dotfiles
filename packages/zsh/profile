@@ -53,3 +53,4 @@ unset -f load_sysroot
 unset -f load_path
 unset -f load_xenv
 
+[ -e "$HOME/.profile.local" ] && source "$HOME/.profile.local"
