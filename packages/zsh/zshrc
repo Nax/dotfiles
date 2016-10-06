@@ -122,6 +122,11 @@ if command -v brew >/dev/null 2>&1; then
     alias bupdate="brew update && brew upgrade --all && brew cleanup"
 fi
 
+if command -v vs_env >/dev/null 2>&1; then
+    alias vs_env32="vs_env x86 "
+    alias vs_env64="vs_env x64 "
+fi
+
 alias sudo="sudo "
 alias env="env "
 # }}}
