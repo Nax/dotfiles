@@ -1,7 +1,7 @@
 # {{{ Tmux
 # If we're not inside tmux, then start tmux
 if command -v tmux>/dev/null; then
-    if [ -z $TMUX ]; then
+    if [ -z $TMUX ] && [[ ! $TERM == screen* ]] && [[ ! $TERM == tmux* ]]; then
         exec tmux -2
     fi
 fi
