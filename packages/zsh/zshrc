@@ -119,7 +119,7 @@ alias gco="git checkout"
 alias gcb="git checkout -b"
 
 if command -v brew >/dev/null 2>&1; then
-    alias bupdate="brew update && brew upgrade --all && brew cleanup"
+    alias bupdate="brew update && brew upgrade && brew cleanup"
 fi
 
 if command -v vs_env >/dev/null 2>&1; then
