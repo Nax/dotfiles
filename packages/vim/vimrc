@@ -50,14 +50,16 @@ set writebackup
 " }}}
 " File Types {{{
 augroup filetypes
-    autocmd!
-    autocmd VimEnter * highlight clear SignColumn
+    au!
+    au VimEnter * highlight clear SignColumn
 
-    autocmd FileType ruby setlocal tabstop=2
-    autocmd FileType ruby setlocal shiftwidth=2
-    autocmd FileType ruby setlocal softtabstop=2
-    autocmd FileType ruby setlocal commentstring=#\ %s
-    autocmd BufEnter Makefile setlocal noexpandtab
+    au FileType ruby setlocal tabstop=2
+    au FileType ruby setlocal shiftwidth=2
+    au FileType ruby setlocal softtabstop=2
+    au FileType ruby setlocal commentstring=#\ %s
+    
+    au FileType ruby,eruby,html setl ts=2 sw=2 sts=2 et
+    au BufEnter Makefile setlocal noexpandtab
 augroup END
 " }}}
 " Vim-plug {{{
