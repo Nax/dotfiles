@@ -28,6 +28,7 @@ set backspace=indent,eol,start
 set foldenable
 set foldmethod=marker
 let mapleader=","
+set pastetoggle=<F2>
 " }}}
 " Navigation {{{
 noremap <silent> <Leader><Space> :nohlsearch<CR>
@@ -84,6 +85,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'rking/ag.vim'
 Plug 'craigemery/vim-autotag'
 Plug 'majutsushi/tagbar'
+Plug 'othree/html5.vim'
 call plug#end()
 " }}}
 " NERDTree {{{
