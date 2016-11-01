@@ -2,7 +2,7 @@
 
 register_link() {
     local l="$1"
-    local linkfile="$DOTFILES_PACKAGE_ROOT/.links"
+    local linkfile="$DOTFILES_ROOT/.data/$DOTFILES_PACKAGE.links"
     touch "$linkfile"
     grep -Fxq "$l" "$linkfile" || echo "$l" >> "$linkfile"
 }
@@ -10,16 +10,15 @@ register_link() {
 simple_install() {
     local src="$1"
     local dst="$2"
-    local src_dir=$(dirname "$DOTFILES_PACKAGE_ROOT/$dst")
-    local dst_dir=$(dirname "$HOME/$dst")
+    local src_path="$DOTFILES_PACKAGE_SRC/$src"
+    local dst_path="$HOME/$dst"
+    local dst_dir=$(dirname "$dst_path")
 
-    [ ! -e "$src_dir" ] && mkdir -p "$src_dir"
     [ ! -e "$dst_dir" ] && mkdir -p "$dst_dir"
 
-    cp "$src" "$DOTFILES_PACKAGE_ROOT/$dst"
-    rm -rf "$HOME/$dst"
-    ln -s "$DOTFILES_PACKAGE_ROOT/$dst" "$HOME/$dst"
-    register_link "$HOME/$dst"
+    rm -rf "$dst_path"
+    ln -s "$src_path" "$dst_path"
+    register_link "$dst_path"
 }
 
 source -- "$1"

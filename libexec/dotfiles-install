@@ -16,6 +16,8 @@ list=false
 list_installed=false
 all=false
 
+shopt -s nullglob
+
 while [ ! "$#" = "0" ]; do
     case "$1" in
     -l|--list)
@@ -36,9 +38,9 @@ if $list && $list_installed; then
 fi
 
 if $list_installed; then
-    pushd "$DOTFILES_ROOT/dotfiles" >/dev/null
-    for f in *; do
-        echo "  $f"
+    pushd "$DOTFILES_DATA" >/dev/null
+    for f in *.links; do
+        echo "  ${f%%.*}"
     done
     popd >/dev/null
     exit
@@ -67,4 +69,3 @@ for p in ${packages[@]}; do
     echo "Installing package $p"
     command -- "$DOTFILES_ROOT/libexec/dotfiles--install-package" "$p"
 done
-
