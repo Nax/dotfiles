@@ -127,6 +127,16 @@ if command -v vs_env >/dev/null 2>&1; then
     alias vs_env64="vs_env x64 "
 fi
 
+# ssh-tmux
+function ssht {
+    if [ -z "$1" ]; then
+        echo "usage: ssht <host> [options]"
+        return 1
+    fi
+    ssh $@ -t "if command -v tmux >/dev/null 2>&1; then exec tmux new-session; else echo 'Could not find tmux on remote.'; exit 1; fi"
+    return $?
+}
+
 alias sudo="sudo "
 alias env="env "
 # }}}
