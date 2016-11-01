@@ -7,8 +7,7 @@ shopt -s nullglob
 cd "$DOTFILES_ROOT"
 git pull -f >/dev/null
 
-cd "$DOTFILES_ROOT/dotfiles"
-
-for p in *; do
-    command -- "$DOTFILES_ROOT/libexec/dotfiles--install-package" "$p"
+cd "$DOTFILES_DATA"
+for p in *.links; do
+    command -- "$DOTFILES_ROOT/libexec/dotfiles--install-package" "${p%%.*}"
 done
