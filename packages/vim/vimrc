@@ -58,7 +58,7 @@ augroup filetypes
     au FileType ruby setlocal softtabstop=2
     au FileType ruby setlocal commentstring=#\ %s
     
-    au FileType ruby,eruby,html,haml setl ts=2 sw=2 sts=2 et
+    au FileType ruby,eruby,html,haml,css,scss setl ts=2 sw=2 sts=2 et
     au BufEnter Makefile setlocal noexpandtab
 augroup END
 " }}}
