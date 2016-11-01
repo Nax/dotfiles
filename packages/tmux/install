@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 
 simple_install  "tmux.conf" ".tmux.conf"
+simple_install  "tmux.local.conf" ".tmux.local.conf"
+simple_install  "tmux.remote.conf" ".tmux.remote.conf"
