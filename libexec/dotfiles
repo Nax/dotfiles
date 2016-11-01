@@ -14,12 +14,11 @@ exec_cmd() {
     fi
 }
 
-DOTFILES_CMD="$0"
-export DOTFILES_CMD
-DOTFILES_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
-export DOTFILES_ROOT
+export DOTFILES_CMD="$0"
+export DOTFILES_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
+export DOTFILES_DATA="$DOTFILES_ROOT/.data"
 
-mkdir -p "$DOTFILES_ROOT/dotfiles"
+mkdir -p "$DOTFILES_DATA"
 
 if [ "$#" = "0" ]; then
     exec_cmd "help"

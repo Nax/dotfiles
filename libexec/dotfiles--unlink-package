@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 package="$1"
-package_root="$DOTFILES_ROOT/dotfiles/$package"
-[ -e "$package_root/.links" ] || exit
-cat "$package_root/.links" | while read -r line ; do
+linkfile="$DOTFILES_DATA/$package.links"
+[ -e "$linkfile" ] || exit 1
+cat "$linkfile" | while read -r line ; do
     rm -rf "$line"
 done
-rm -rf "$package_root/.links"
+rm -rf "$linkfile"
