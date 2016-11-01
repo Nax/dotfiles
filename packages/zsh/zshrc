@@ -1,8 +1,14 @@
 # {{{ Tmux
 # If we're not inside tmux, then start tmux
+# We also start tmux if the parent process is sshd
 if command -v tmux>/dev/null; then
     if [ -z $TMUX ] && [[ ! $TERM == screen* ]] && [[ ! $TERM == tmux* ]]; then
         exec tmux -2
+    else
+        PARENT=$(ps -o comm= -p $PPID)
+        case "$PARENT" in
+            sshd|*/sshd) exec tmux -2 ;;
+        esac
     fi
 fi
 # }}}
@@ -126,16 +132,6 @@ if command -v vs_env >/dev/null 2>&1; then
     alias vs_env32="vs_env x86 "
     alias vs_env64="vs_env x64 "
 fi
-
-# ssh-tmux
-function ssht {
-    if [ -z "$1" ]; then
-        echo "usage: ssht <host> [options]"
-        return 1
-    fi
-    ssh $@ -t "if command -v tmux >/dev/null 2>&1; then exec tmux new-session; else echo 'Could not find tmux on remote.'; exit 1; fi"
-    return $?
-}
 
 alias sudo="sudo "
 alias env="env "
