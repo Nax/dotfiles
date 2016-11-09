@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
 simple_install "gemrc" ".gemrc"
+simple_install "railsrc" ".railsrc"

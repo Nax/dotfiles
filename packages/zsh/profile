@@ -41,9 +41,9 @@ load_xenv() {
 load_sysroot /usr/local
 load_sysroot "$HOME/.brew"
 
-for f in /opt/cross/*/bin; do
-    load_path "$f"
-done
+if [ -e "/opt/cross/bin" ]; then
+    load_path "/opt/cross/bin"
+fi
 
 load_path "$HOME/.bin"
 load_path "$HOME/bin"
