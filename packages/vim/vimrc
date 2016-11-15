@@ -42,7 +42,7 @@ map <silent> <Leader><Down>             <C-W><Down>
 map <silent> <Leader><Up>               <C-W><Up>
 " }}}
 " Cindent {{{
-set cinoptions+=g0
+set cino+=g0,t0,N-s,+0,i0
 " }}}
 " Backups {{{
 set backup
