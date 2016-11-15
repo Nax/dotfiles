@@ -41,6 +41,9 @@ map <silent> <Leader><Right>            <C-W><Right>
 map <silent> <Leader><Down>             <C-W><Down>
 map <silent> <Leader><Up>               <C-W><Up>
 " }}}
+" Cindent {{{
+set cinoptions+=g0
+" }}}
 " Backups {{{
 set backup
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
