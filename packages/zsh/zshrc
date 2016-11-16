@@ -4,7 +4,7 @@
 if command -v tmux>/dev/null; then
     if [ -z $TMUX ] && [[ ! $TERM == screen* ]] && [[ ! $TERM == tmux* ]]; then
         exec tmux -2
-    else
+    elif [[ "$(uname -o)" != "Cygwin" ]]; then
         PARENT=$(ps -o comm= -p $PPID)
         case "$PARENT" in
             sshd|*/sshd) exec tmux -2 ;;
