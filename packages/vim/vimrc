@@ -60,24 +60,26 @@ augroup filetypes
     au FileType ruby setlocal shiftwidth=2
     au FileType ruby setlocal softtabstop=2
     au FileType ruby setlocal commentstring=#\ %s
-    
+
     au FileType ruby,eruby,html,haml,css,scss setl ts=2 sw=2 sts=2 et
     au BufEnter Makefile setlocal noexpandtab
 augroup END
 " }}}
 " Vim-plug {{{
 if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall | source $MYVIMRC
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 " }}}
-" Plugin Helpers {{{
-command! PU PlugUpdate | PlugUpgrade
+" Commands {{{
+command! -bar PU PlugUpdate | PlugUpgrade
+command! -bar NoTrail    :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s
+command! -bar Indent     normal mzgg=G`z
+command! -bar Fixup      :retab<Bar>:NoTrail<Bar>:Indent
 
-function! DoRemote(arg)
-  UpdateRemotePlugins
-endfunction
+nnoremap <F5>   :Fixup<CR>
+inoremap <F5>   :Fixup<CR>
 " }}}
 " Plugins {{{
 call plug#begin('~/.vim/plugged')
@@ -131,12 +133,3 @@ let g:airline_right_sep=''
 set background=dark
 silent! colo xoria256
 "}}}
-" Misc. {{{
-if !exists("*ReloadConfig")
-    function! ReloadConfig()
-        silent ! dotfiles update
-        so $MYVIMRC
-    endfunction
-    command! ReloadConfig :call ReloadConfig()
-endif
-" }}}
