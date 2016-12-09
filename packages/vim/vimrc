@@ -14,6 +14,7 @@ set fencs=utf-8
 filetype plugin indent on
 syn on
 set number
+set norelativenumber
 set mouse=a
 set cursorline
 set wildmenu
@@ -29,20 +30,68 @@ set foldenable
 set foldmethod=marker
 let mapleader=","
 set pastetoggle=<F2>
-" }}}
-" Navigation {{{
+
+set cino+=g0,t0,N-s,+0,i0
+
+noremap <C-c> <Esc>
 noremap <silent> <Leader><Space> :nohlsearch<CR>
 
 noremap <silent> > :tabn<CR>
 noremap <silent> < :tabp<CR>
 
-map <silent> <Leader><Left>             <C-W><Left>
-map <silent> <Leader><Right>            <C-W><Right>
-map <silent> <Leader><Down>             <C-W><Down>
-map <silent> <Leader><Up>               <C-W><Up>
-" }}}
-" Cindent {{{
-set cino+=g0,t0,N-s,+0,i0
+fun! ToggleNumber()
+    if &number
+        set nonumber
+        set relativenumber
+    else
+        set number
+        set norelativenumber
+    endif
+endfun
+
+fun! PushNumber()
+    if &number
+        let g:Number = 1
+    else
+        let g:Number = 0
+        call ToggleNumber()
+    endif
+endfun
+
+fun! PopNumber()
+    if g:Number
+        set number
+        set norelativenumber
+    else
+        set nonumber
+        set relativenumber
+    endif
+endfun
+
+fun! NoTrail()
+    let _nohlsearch=&hlsearch
+    let _s=@/
+    %s/\m\s\+$//e
+    let @/=_s
+    if !_nohlsearch
+        set nohlsearch
+    endif
+endfun
+
+command! -bar PU            :PlugUpdate<Bar>:PlugUpgrade
+command! -bar NoTrail       :call NoTrail()
+command! -bar Indent        normal mzgg=G`z
+command! -bar Fixup         :retab<Bar>:NoTrail<Bar>:Indent
+command! -bar ToggleNumber  :call ToggleNumber()
+
+noremap  <F5>           :Fixup<CR>
+noremap  <silent> <F3>  :ToggleNumber<CR>
+
+augroup numbers
+    au!
+    au InsertEnter * call PushNumber()
+    au InsertLeave * call PopNumber()
+augroup END
 " }}}
 " Backups {{{
 set backup
@@ -71,15 +120,6 @@ if empty(glob('~/.vim/autoload/plug.vim'))
                 \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
-" }}}
-" Commands {{{
-command! -bar PU PlugUpdate | PlugUpgrade
-command! -bar NoTrail    :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s
-command! -bar Indent     normal mzgg=G`z
-command! -bar Fixup      :retab<Bar>:NoTrail<Bar>:Indent
-
-nnoremap <F5>   :Fixup<CR>
-inoremap <F5>   :Fixup<CR>
 " }}}
 " Plugins {{{
 call plug#begin('~/.vim/plugged')
