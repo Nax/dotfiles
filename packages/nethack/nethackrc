@@ -2,7 +2,6 @@
 # Nax's config
 # Inspired by https://github.com/Tolchi/dotfile/blob/master/nethackrc
 
-# General config {{{
 OPTIONS=name:Nax
 OPTIONS=hilite_pet
 OPTIONS=pettype:cat
@@ -11,7 +10,7 @@ OPTIONS=dogname:Beowulf
 OPTIONS=horsename:Findus
 OPTIONS=fruit:watermelon
 OPTIONS=autopickup
-OPTIONS=pickup_types:$?!/="
+OPTIONS=pickup_types:$?!/="%*
 OPTIONS=disclose:+i +a +g +c +v +o
 OPTIONS=!cmdassist
 OPTIONS=!help
@@ -41,8 +40,7 @@ OPTIONS=use_darkgray
 OPTIONS=fullscreen
 OPTIONS=menucolors
 OPTIONS=statushilites
-# }}}
-# Status {{{
+
 OPTIONS=hilite_status: gold/30%/yellow/yellow
 OPTIONS=hilite_status: hitpoints/66%/orange/bright-green
 OPTIONS=hilite_status: hitpoints-max/30%/bold/bold
@@ -60,8 +58,7 @@ OPTIONS=hilite_status: wisdom/updown/red/green
 OPTIONS=hilite_status: charisma/updown/red/green
 
 OPTIONS=hilite_status: armor-class/30%/bright-cyan/bright-cyan
-# }}}
-# BUC {{{
+
 MENUCOLOR=" !C"=white
 MENUCOLOR=" !B"=white
 MENUCOLOR=" !UC"=white
@@ -71,8 +68,7 @@ MENUCOLOR=" [+-][0-9]"=white
 
 MENUCOLOR=" blessed"=cyan
 MENUCOLOR=" cursed"=red
-# }}}
-# Potions {{{
+
 MENUCOLOR=" holy water"=cyan&bold
 MENUCOLOR=" blessed clear potion"=cyan&bold
 MENUCOLOR=" blessed potions? called water"=cyan&bold
@@ -82,8 +78,7 @@ MENUCOLOR=" unholy water"=orange
 MENUCOLOR=" cursed clear potion"=orange
 MENUCOLOR=" cursed potions? called water"=orange
 MENUCOLOR=" potions? called water named cursed"=orange
-# }}}
-# Good stuff {{{
+
 MENUCOLOR=" bag .* holding"=magenta
 MENUCOLOR=" luckstone"=magenta
 MENUCOLOR=" wand .* wishing"= magenta
@@ -95,8 +90,7 @@ MENUCOLOR=" lamp .* magic"=magenta
 MENUCOLOR=" ring .* regeneration"=magenta
 MENUCOLOR=" ring .* slow digestion"=magenta
 MENUCOLOR=" amulet .* life saving"=magenta
-# }}}
-# Artifacts {{{
+
 MENUCOLOR=" Dragonbane"=lightgreen
 MENUCOLOR=" Fire Brand"=lightgreen
 MENUCOLOR=" Frost Brand"=lightgreen
@@ -145,22 +139,18 @@ MENUCOLOR=" Book of the Dead"=magenta&bold
 MENUCOLOR=" papyrus spellbook"=magenta&bold
 
 MENUCOLOR=" Amulet of Yendor named"=magenta&bold&underline
-# }}}
-# Bad stuff {{{
+
 MENUCOLOR=" loadstone"=red&underline
 MENUCOLOR=" cursed .* luckstone"=orange&underline
-# }}}
-# Bag of Holdings {{{
+
 MENUCOLOR=" bag .* tricks"=blue&underline
 MENUCOLOR=" wand .* cancellation"=blue&underline
 MENUCOLOR=" wand .* vanish"=blue&underline
-# }}}
-# Valuable {{{
+
 MENUCOLOR=" gold piece"=yellow
 MENUCOLOR=" valuable"=brown
 MENUCOLOR=" gems? .* hard"=yellow
-# }}}
-# Spells {{{
+
 MENUCOLOR=" 0% [0-9% -]*"=white
 MENUCOLOR=" [1-9]% [0-9% -]*"=cyan
 MENUCOLOR=" [12][0-9]% [0-9% -]*"=cyan
@@ -172,26 +162,16 @@ MENUCOLOR=" 9[0-9]% [0-9% -]*"=red
 MENUCOLOR=" 100% [0-9% -]*"=red
 
 MENUCOLOR="[a-zA-Z] - [a-zA-Z ]+ [0-9]\*   [a-z]+ +[0-9]+%"=magenta
-# }}}
-# Shop {{{
+
 MENUCOLOR=" (unpaid, [0-9]+ zorkmids?)"=underline
-# }}}
-# Ehance {{{
+
 MENUCOLOR="^ +[a-z -]+ +\[\(Unskilled\|Basic\|Skilled\|Expert\|Master\|Grand Master\)\]$"=none
 MENUCOLOR="^ *[a-z] - +[a-z -]+ +\[\(Unskilled\|Basic\|Skilled\|Expert\|Master\|Grand Master\)\]$"=white
 MENUCOLOR="^ +\* +[a-z -]+ +\[\(Unskilled\|Basic\|Skilled\|Expert\|Master\|Grand Master\)\]$"=white
 MENUCOLOR="^ +# +[a-z -]+ +\[\(Unskilled\|Basic\|Skilled\|Expert\|Master\|Grand Master\)\]$"=none
-# }}}
-# Symbols {{{
+
 SYMBOLS=S_ghost:8
-# }}}
-# Msgtype {{{
-# Displacing pets
-MSGTYPE=hide "You displaced *"
-# Items on floor
-MSGTYPE=norep "You see here a *"
-MSGTYPE=norep "You see here an *"
-# Instadeaths
+
 MSGTYPE=stop "The couatl swings itself around you!"
 MSGTYPE=stop "The electric eel swings itself around you!"
 MSGTYPE=stop "The giant eel swings itself around you!"
@@ -214,9 +194,118 @@ MSGTYPE=stop "Your consciousness is fading."
 MSGTYPE=stop "You feel deathly sick."
 MSGTYPE=stop "You feel much worse."
 MSGTYPE=stop "You feel even worse."
-# Things that aren't dangerous by themselves but could kill you if you don't notice.
+
 MSGTYPE=stop "You fail to cast the spell correctly."
 MSGTYPE=stop "You see here a cockatrice corpse."
 MSGTYPE=stop "You see here a chickatrice corpse."
 MSGTYPE=stop "You are beginning to feel weak."
-# }}}
+
+MSGTYPE=stop ".* Amulet of Yendor.* feels*"
+MSGTYPE=stop ".* strange vibration.*"
+MSGTYPE=stop ".* weak trembling.*"
+MSGTYPE=stop ".* faint trembling.*"
+
+MSGTYPE=hide "You displaced .*"
+MSGTYPE=hide "You descend .*"
+MSGTYPE=hide "You climb .*"
+
+AUTOPICKUP_EXCEPTION=">Amulet of Yendor$"
+AUTOPICKUP_EXCEPTION="<Amulet of Vendor named"
+
+AUTOPICKUP_EXCEPTION=">scroll of scare monster"
+AUTOPICKUP_EXCEPTION=">scroll called scare monster"
+
+AUTOPICKUP_EXCEPTION="<gem"
+AUTOPICKUP_EXCEPTION=">glass?"
+AUTOPICKUP_EXCEPTION=">loadstone[^<]*$"
+AUTOPICKUP_EXCEPTION="<stone called luck"
+AUTOPICKUP_EXCEPTION="<luckstone"
+AUTOPICKUP_EXCEPTION="<touchstone"
+AUTOPICKUP_EXCEPTION=">rock[^<]*$"
+AUTOPICKUP_EXCEPTION=">stone[^<]*$"
+
+AUTOPICKUP_EXCEPTION="<wand of wishing"
+AUTOPICKUP_EXCEPTION="<wand called wish"
+AUTOPICKUP_EXCEPTION="<wand of create monster"
+AUTOPICKUP_EXCEPTION="<wand of teleportation"
+AUTOPICKUP_EXCEPTION="<wand called tele"
+AUTOPICKUP_EXCEPTION="<wand of polymorph"
+AUTOPICKUP_EXCEPTION="<wand called poly"
+AUTOPICKUP_EXCEPTION="<wand of fire"
+AUTOPICKUP_EXCEPTION="<wand of lightning"
+AUTOPICKUP_EXCEPTION="<wand of death"
+AUTOPICKUP_EXCEPTION=">wand of cold[^<]*$"
+AUTOPICKUP_EXCEPTION="<magic marker"
+AUTOPICKUP_EXCEPTION="< lamp"
+AUTOPICKUP_EXCEPTION="> oil lamp [^<]*$"
+AUTOPICKUP_EXCEPTION="> lamp called oil[^<]*$"
+AUTOPICKUP_EXCEPTION="<amulet of life saving"
+AUTOPICKUP_EXCEPTION="<amulet called life"
+AUTOPICKUP_EXCEPTION="<athame"
+
+AUTOPICKUP_EXCEPTION=">:0)"
+AUTOPICKUP_EXCEPTION="> named empty"
+AUTOPICKUP_EXCEPTION=">wand of nothing"
+AUTOPICKUP_EXCEPTION="> called nothing"
+
+AUTOPICKUP_EXCEPTION="<full healing"
+AUTOPICKUP_EXCEPTION="<extra healing"
+AUTOPICKUP_EXCEPTION="<healing"
+AUTOPICKUP_EXCEPTION="<gain level"
+
+AUTOPICKUP_EXCEPTION="<[^| ]the "
+
+AUTOPICKUP_EXCEPTION=">a corpse[^<]*$"
+AUTOPICKUP_EXCEPTION=">b corpse[^<]*$"
+AUTOPICKUP_EXCEPTION=">c corpse[^<]*$"
+AUTOPICKUP_EXCEPTION="<lizard corpse"
+AUTOPICKUP_EXCEPTION=">[^r]d corpse[^<]*$"
+AUTOPICKUP_EXCEPTION=">[^a]rd corpse[^<]*$"
+AUTOPICKUP_EXCEPTION=">[^z]ard corpse[^<]*$"
+AUTOPICKUP_EXCEPTION=">[^l]izard corpse[^<]*$"
+AUTOPICKUP_EXCEPTION="<floating eye corpse"
+AUTOPICKUP_EXCEPTION=">[^y]e corpse[^<]*$"
+AUTOPICKUP_EXCEPTION=">f corpse[^<]*$"
+AUTOPICKUP_EXCEPTION=">g corpse[^<]*$"
+AUTOPICKUP_EXCEPTION="<wraith corpse"
+AUTOPICKUP_EXCEPTION=">[^t]h corpse[^<]*$"
+AUTOPICKUP_EXCEPTION=">[^i]th corpse[^<]*$"
+AUTOPICKUP_EXCEPTION=">i corpse[^<]*$"
+AUTOPICKUP_EXCEPTION=">k corpse[^<]*$"
+AUTOPICKUP_EXCEPTION=">l corpse[^<]*$"
+AUTOPICKUP_EXCEPTION=">m corpse[^<]*$"
+AUTOPICKUP_EXCEPTION="<lichen corpse"
+AUTOPICKUP_EXCEPTION=">[^e]n corpse[^<]*$"
+AUTOPICKUP_EXCEPTION=">[^h]en corpse[^<]*$"
+AUTOPICKUP_EXCEPTION=">o corpse[^<]*$"
+AUTOPICKUP_EXCEPTION=">p corpse[^<]*$"
+AUTOPICKUP_EXCEPTION=">r corpse[^<]*$"
+AUTOPICKUP_EXCEPTION=">s corpse[^<]*$"
+AUTOPICKUP_EXCEPTION="<newt corpse"
+AUTOPICKUP_EXCEPTION=">[^w]t corpse[^<]*$"
+AUTOPICKUP_EXCEPTION=">u corpse[^<]*$"
+AUTOPICKUP_EXCEPTION=">v corpse[^<]*$"
+AUTOPICKUP_EXCEPTION=">x corpse[^<]*$"
+AUTOPICKUP_EXCEPTION=">y corpse[^<]*$"
+AUTOPICKUP_EXCEPTION=">' corpse[^<]*$"
+
+AUTOPICKUP_EXCEPTION="<conical hat"
+AUTOPICKUP_EXCEPTION="<plumed helmet"
+AUTOPICKUP_EXCEPTION="<etched helmet"
+AUTOPICKUP_EXCEPTION="<crested helmet"
+AUTOPICKUP_EXCEPTION="<visored helmet"
+AUTOPICKUP_EXCEPTION="<tattered cape"
+AUTOPICKUP_EXCEPTION="<opera cloak"
+AUTOPICKUP_EXCEPTION="<ornamental cope"
+AUTOPICKUP_EXCEPTION="<piece of cloth"
+AUTOPICKUP_EXCEPTION="<old gloves"
+AUTOPICKUP_EXCEPTION="<padded gloves"
+AUTOPICKUP_EXCEPTION="<riding gloves"
+AUTOPICKUP_EXCEPTION="<fencing gloves"
+AUTOPICKUP_EXCEPTION="<combat boots"
+AUTOPICKUP_EXCEPTION="<jungle boots"
+AUTOPICKUP_EXCEPTION="<hiking boots"
+AUTOPICKUP_EXCEPTION="<mud boots"
+AUTOPICKUP_EXCEPTION="<buckled boots"
+AUTOPICKUP_EXCEPTION="<riding boots"
+AUTOPICKUP_EXCEPTION="<snow boots"
