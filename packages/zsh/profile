@@ -39,7 +39,8 @@ load_xenv() {
 }
 
 load_sysroot /usr/local
-load_sysroot "$HOME/.brew"
+load_sysroot /opt/local
+load_sysroot "$HOME/.ports"
 
 if [ -e "/opt/cross/bin" ]; then
     load_path "/opt/cross/bin"
