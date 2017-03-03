@@ -6,19 +6,19 @@ unset MANPATH
 export LANG=en_US.UTF-8
 
 if [ -x /usr/libexec/path_helper ]; then
-  PATH=""
-  eval `/usr/libexec/path_helper -s`
+    PATH=""
+    eval `/usr/libexec/path_helper -s`
 fi
 
 # For python
 export PYTHON_CONFIGURE_OPTS="--enable-shared"
 
 load_sysroot() {
-    [ -e "$1/bin" ] && export PATH="$1/bin:$PATH"
-    [ -e "$1/sbin" ] && export PATH="$1/sbin:$PATH" 
-    [ -e "$1/lib" ] && export LIBRARY_PATH="$1/lib:$LIBRARY_PATH"
-    [ -e "$1/share/man" ] && export MANPATH="$1/share/man:$MANPATH"
-    if [ -e "$1/include" ]; then
+    if [ -e "$1" ]; then
+        export PATH="$1/bin:$PATH"
+        export PATH="$1/sbin:$PATH"
+        export LIBRARY_PATH="$1/lib:$LIBRARY_PATH"
+        export MANPATH="$1/share/man:$MANPATH"
         if [ -z "$CPATH" ]; then
             export CPATH="$1/include"
         else
@@ -38,8 +38,8 @@ load_xenv() {
     fi
 }
 
-load_sysroot /usr/local
 load_sysroot /opt/local
+load_sysroot /usr/local
 load_sysroot "$HOME/.ports"
 
 if [ -e "/opt/cross/bin" ]; then
