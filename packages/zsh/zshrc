@@ -1,4 +1,3 @@
-# {{{ Tmux
 # If we're not inside tmux, then start tmux
 # We also start tmux if the parent process is sshd
 if command -v tmux>/dev/null; then
@@ -11,31 +10,26 @@ if command -v tmux>/dev/null; then
         esac
     fi
 fi
-# }}}
-# Xenv {{{
+
 # We need to reload xenv
 if command -v xenv >/dev/null 2>&1; then
     eval "$(xenv init - $SHELL)"
 fi
-# }}}
-# User Namespace {{{
+
 if command -v 'reattach-to-user-namespace' >/dev/null; then
     if [ -z "$REATTACH_TO_USER_NAMESPACE" ]; then
         export REATTACH_TO_USER_NAMESPACE=1
         exec reattach-to-user-namespace zsh
     fi
 fi
-# }}}
-# Modules {{{
+
 autoload -U colors && colors
 autoload -U compinit && compinit -u
-# }}}
-# Dotfiles {{{
+
 if [ -e "$HOME/.dotfiles/bin" ]; then
     export PATH="$HOME/.dotfiles/bin:$PATH"
 fi
-# }}}
-# Options {{{
+
 setopt APPEND_HISTORY
 setopt AUTOCD
 setopt AUTO_LIST
@@ -53,13 +47,10 @@ setopt SHARE_HISTORY
 setopt RM_STAR_SILENT
 setopt NO_BGNICE
 setopt NO_BEEP
-# }}}
-# History {{{
+
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=10000
 SAVEHIST=10000
-# }}}
-# Prompt {{{
 
 if [ "$EUID" = 0 ]; then
     user_color="red"
@@ -83,8 +74,7 @@ precmd() {
 PROMPT="%B%F{$user_color}%n%F{white}@%F{blue}%m %F{magenta}%5~\${vcs_segment}%F{white} %# %b%f%k"
 RPROMPT="%(?..%B%F{white}%K{196} %? %b%f%k)"
 ZLE_RPROMPT_INDENT=-1
-# }}}
-# Misc {{{
+
 bindkey -v
 find_variant() {
     for p in "$@"; do
@@ -99,8 +89,7 @@ export CLICOLOR=1
 export PAGER=$(find_variant most less more)
 export VISUAL=$(find_variant nvim vim vi)
 export EDITOR="$VISUAL"
-# }}}
-# Alias {{{
+
 ls_default="ls"
 
 if ls --color=auto &> /dev/null; then
@@ -135,4 +124,3 @@ fi
 
 alias sudo="sudo "
 alias env="env "
-# }}}

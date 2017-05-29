@@ -12,6 +12,13 @@ let g:python_host_skip_check = 1
 let g:python3_host_skip_check = 1
 let g:EditorConfig_core_mode = 'python_external'
 
+if has('mac')
+    let g:clang_library_path = '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
+endif
+let g:clang_auto_select = 1
+let g:clang_complete_auto = 0
+" let g:clang_snippets = 1
+
 filetype plugin indent on
 syn on
 set lazyredraw
@@ -32,6 +39,7 @@ set foldenable
 set foldmethod=marker
 let mapleader=","
 set pastetoggle=<F2>
+set completeopt=longest,menuone
 
 set cino+=g0,t0,N-s,+0,i0
 
@@ -40,6 +48,9 @@ noremap <silent> <Leader><Space> :nohlsearch<CR>
 
 noremap <silent> > :tabn<CR>
 noremap <silent> < :tabp<CR>
+
+inoremap <C-Space> <C-X><C-U>
+inoremap <C-@> <C-X><C-U>
 
 fun! ToggleNumber()
     if &number
@@ -129,6 +140,7 @@ Plug 'justinmk/vim-syntax-extra'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'rking/ag.vim'
 Plug 'othree/html5.vim'
+Plug 'Rip-Rip/clang_complete'
 call plug#end()
 
 nnoremap <Space> za
