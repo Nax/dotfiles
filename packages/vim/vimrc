@@ -17,7 +17,12 @@ if has('mac')
 endif
 let g:clang_auto_select = 1
 let g:clang_complete_auto = 0
-" let g:clang_snippets = 1
+
+let NERDTreeAutoDeleteBuffer = 1
+let NERDTreeQuitOnOpen = 1
+let NERDTreeCaseSensitiveSort = 1
+let NERDTreeCascadeSingleChildDir = 0
+let NERDTreeCascadeOpenSingleChildDir = 0
 
 filetype plugin indent on
 syn on
@@ -145,6 +150,7 @@ call plug#end()
 
 nnoremap <Space> za
 noremap <silent> <Tab> :NERDTreeToggle<CR>
+noremap <silent> <leader>. :edit .<CR>
 
 let g:ctrlp_match_window = 'bottom,order:ttb'
 let g:ctrlp_switch_buffer = 0
