@@ -1,5 +1,5 @@
 [core]
-    excludesfile        = "$HOME/.gitignore"
+    excludesfile        = "~/.gitignore"
     eol                 = lf
     autocrlf            = input
 [credential]

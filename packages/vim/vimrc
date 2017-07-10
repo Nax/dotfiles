@@ -148,6 +148,10 @@ Plug 'othree/html5.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'Rip-Rip/clang_complete'
+Plug 'octref/rootignore'
+Plug 'szw/vim-tags'
+Plug 'majutsushi/tagbar'
+Plug 'tpope/vim-fugitive'
 call plug#end()
 
 nnoremap <Space> za
@@ -160,7 +164,6 @@ let g:ctrlp_working_path_mode = 0
 let g:ctrlp_match_window = 'results:50'
 if executable('ag')
     let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
-    let g:ctrlp_use_caching=0
 endif
 nnoremap <silent> <C-S-P> :CtrlPTag<CR>
 
@@ -174,6 +177,50 @@ if executable('ag')
 else
     nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>g
 endif
+
+" CtrlP
+function! MyFilename()
+  if expand('%:t') == 'ControlP'
+    return g:lightline.ctrlp_prev . ' ' . g:lightline.subseparator.left . ' ' . 
+          \ g:lightline.ctrlp_item . ' ' . g:lightline.subseparator.left . ' ' .
+          \ g:lightline.ctrlp_next
+  endif
+  if expand('%:t') == '__Tagbar__'
+    return  'Tagbar ' . g:lightline.subseparator.left . ' ' . 
+          \ g:lightline.fname
+  endif
+  return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
+        \ (&ft == 'vimfiler' ? vimfiler#get_status_string() : 
+        \  &ft == 'unite' ? unite#get_status_string() : 
+        \  &ft == 'vimshell' ? vimshell#get_status_string() :
+        \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
+        \ ('' != MyModified() ? ' ' . MyModified() : '')
+endfunction
+
+function! CtrlPMark()
+  return expand('%:t') =~ 'ControlP' ? g:lightline.ctrlp_marked : ''
+endfunction
+
+let g:ctrlp_status_func = {
+  \ 'main': 'CtrlPStatusFunc_1',
+  \ 'prog': 'CtrlPStatusFunc_2',
+  \ }
+function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
+  let g:lightline.ctrlp_prev = a:prev
+  let g:lightline.ctrlp_item = a:item
+  let g:lightline.ctrlp_next = a:next
+  let g:lightline.ctrlp_marked = a:marked
+  return lightline#statusline(0)
+endfunction
+function! CtrlPStatusFunc_2(str)
+  return lightline#statusline(0)
+endfunction
+
+let g:tagbar_status_func = 'TagbarStatusFunc'
+function! TagbarStatusFunc(current, sort, fname, ...) abort
+    let g:lightline.fname = a:fname
+  return lightline#statusline(0)
+endfunction
 
 set laststatus=2
 set noshowmode
