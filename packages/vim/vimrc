@@ -112,20 +112,13 @@ augroup numbers
 augroup END
 
 set backup
-set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-set backupskip=/tmp/*,/private/tmp/*
-set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set backupdir=~/.vim-tmp//,~/.tmp//,~/tmp//,/var/tmp//,/tmp//
+set directory=~/.vim-tmp//,~/.tmp//,~/tmp//,/var/tmp//,/tmp//
 set writebackup
 
 augroup filetypes
     au!
     au VimEnter * highlight clear SignColumn
-
-    au FileType ruby setlocal tabstop=2
-    au FileType ruby setlocal shiftwidth=2
-    au FileType ruby setlocal softtabstop=2
-    au FileType ruby setlocal commentstring=#\ %s
-
     au FileType ruby,eruby,html,haml,css,scss setl ts=2 sw=2 sts=2 et
     au BufEnter Makefile setlocal noexpandtab
 augroup END
@@ -139,7 +132,7 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'vim-scripts/xoria256.vim'
 Plug 'itchyny/lightline.vim'
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 Plug 'editorconfig/editorconfig-vim'
 Plug 'justinmk/vim-syntax-extra'
 Plug 'ctrlpvim/ctrlp.vim'
