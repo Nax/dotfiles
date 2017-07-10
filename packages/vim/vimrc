@@ -145,7 +145,10 @@ Plug 'octref/rootignore'
 Plug 'szw/vim-tags'
 Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 call plug#end()
+
+set updatetime=250
 
 nnoremap <Space> za
 noremap <silent> <Tab> :NERDTreeToggle<CR>
