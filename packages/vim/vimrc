@@ -145,6 +145,8 @@ Plug 'justinmk/vim-syntax-extra'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'rking/ag.vim'
 Plug 'othree/html5.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
 Plug 'Rip-Rip/clang_complete'
 call plug#end()
 

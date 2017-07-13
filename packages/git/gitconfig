@@ -47,3 +47,5 @@
     path                = ~/.gitconfig.local
 [alias]
     cloner              = "clone --recursive -j8"
+[merge "ours"]
+	driver = true
