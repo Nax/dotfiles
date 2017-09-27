@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# Usage: Make a release
+
+if [ ! "$#" = "1" ]; then
+    echo "dotfiles: usage: $DOTFILES_CMD release <message>"
+    exit 1
+fi
+
+message="$1"
+cd "$DOTFILES_ROOT"
+git add -A && git commit -m "$message" && git push origin master
