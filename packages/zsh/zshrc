@@ -86,6 +86,7 @@ find_variant() {
 }
 
 export CLICOLOR=1
+export LSCOLORS=ExFxBxDxCxegedabagacad
 export PAGER=$(find_variant most less more)
 export VISUAL=$(find_variant nvim vim vi)
 export EDITOR="$VISUAL"
@@ -97,8 +98,9 @@ if ls --color=auto &> /dev/null; then
     alias ls="$ls_default"
 fi
 
-alias l="$ls_default -la"
-alias ll="$ls_default -l"
+alias ls="$ls_default -Fh"
+alias l="$ls_default -laFh"
+alias ll="$ls_default -lFh"
 
 unset ls_default
 
