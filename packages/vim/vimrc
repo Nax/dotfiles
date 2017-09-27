@@ -119,7 +119,11 @@ set writebackup
 augroup filetypes
     au!
     au VimEnter * highlight clear SignColumn
-    au FileType ruby,eruby,html,haml,css,scss,yaml setl ts=2 sw=2 sts=2 et
+    au FileType ruby,eruby setl ts=2 sw=2 sts=2 et
+    au FileType html,haml setl ts=2 sw=2 sts=2 et
+    au FileType css,scss setl ts=2 sw=2 sts=2 et
+    au FileType javascript,jsx,json setl ts=2 sw=2 sts=2 et
+    au FileType yaml setl ts=2 sw=2 sts=2 et
     au BufEnter Makefile setlocal noexpandtab
 augroup END
 
