@@ -23,60 +23,10 @@ if command -v 'reattach-to-user-namespace' >/dev/null; then
     fi
 fi
 
-autoload -U colors && colors
-autoload -U compinit && compinit -u
-zstyle ':completion:*' menu select
-
 if [ -e "$HOME/.dotfiles/bin" ]; then
     export PATH="$HOME/.dotfiles/bin:$PATH"
 fi
 
-setopt APPEND_HISTORY
-setopt AUTOCD
-setopt AUTO_LIST
-setopt EXTENDED_HISTORY
-setopt GLOB_DOTS
-setopt HASH_LIST_ALL
-setopt HIST_IGNORE_DUPS
-setopt HIST_IGNORE_SPACE
-setopt HIST_REDUCE_BLANKS
-setopt INC_APPEND_HISTORY
-setopt NULLGLOB
-setopt PROMPT_SUBST
-setopt PUSHD_SILENT
-setopt SHARE_HISTORY
-setopt RM_STAR_SILENT
-setopt NO_BGNICE
-setopt NO_BEEP
-
-HISTFILE="$HOME/.zsh_history"
-HISTSIZE=10000
-SAVEHIST=10000
-
-if [ "$EUID" = 0 ]; then
-    user_color="red"
-else
-    user_color="green"
-fi
-
-precmd() {
-    vcs_segment=""
-    git_branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
-    if [ ! -z "$git_branch" ]; then
-        vcs_segment="$git_branch"
-        git_status=$(git status --porcelain)
-        if [ ! -z "$git_status" ]; then
-            vcs_segment="$vcs_segment*"
-        fi
-        vcs_segment=" %F{yellow}$vcs_segment"
-    fi
-}
-
-PROMPT="%B%F{$user_color}%n%F{white}@%F{blue}%m %F{magenta}%5~\${vcs_segment}%F{white} %# %b%f%k"
-RPROMPT="%(?..%B%F{white}%K{196} %? %b%f%k)"
-ZLE_RPROMPT_INDENT=-1
-
-bindkey -v
 find_variant() {
     for p in "$@"; do
         if command -v "$p" >/dev/null 2>&1; then
@@ -92,56 +42,7 @@ export PAGER=$(find_variant most less more)
 export VISUAL=$(find_variant nvim vim vi)
 export EDITOR="$VISUAL"
 
-ls_default="ls"
-
-if ls --color=auto &> /dev/null; then
-    ls_default="$ls_default --color=auto"
-    alias ls="$ls_default"
-fi
-
-alias ls="$ls_default -Fh"
-alias l="$ls_default -laFh"
-alias ll="$ls_default -lFh"
-
-unset ls_default
-
-# Git
-alias g="git"
-alias gs="git status"
-alias gc="git commit"
-alias gcm="git commit -m"
-alias gca="git commit --amend"
-alias gb="git branch"
-alias gr="git rebase"
-alias gri="git rebase -i"
-alias gco="git checkout"
-alias gcb="git checkout -b"
-alias gff="git merge --ff"
-
-function gpr {
-    local current_branch="$(git rev-parse --abbrev-ref HEAD)"
-    local branch=${1:-master}
-    git checkout "${branch}"
-    git pull
-    git checkout "${current_branch}"
-    git rebase "${branch}"
-}
-
-# Ruby
-alias be="bundle exec"
-alias bi="bundle install --path=vendor/bundle"
-
-# Heroku
-alias hrc="heroku run bin/rails console"
-
-if command -v brew >/dev/null 2>&1; then
-    alias bupdate="brew update && brew upgrade && brew cleanup"
-fi
-
-if command -v vs_env >/dev/null 2>&1; then
-    alias vs_env32="vs_env x86 "
-    alias vs_env64="vs_env x64 "
-fi
-
-alias sudo="sudo "
-alias env="env "
+source "$HOME/.zsh/options.zsh"
+source "$HOME/.zsh/alias.zsh"
+source "$HOME/.zsh/completion.zsh"
+source "$HOME/.zsh/prompt.zsh"

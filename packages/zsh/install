@@ -3,3 +3,8 @@
 simple_install  "zshrc"     ".zshrc"
 simple_install  "zprofile"  ".zprofile"
 simple_install  "profile"   ".profile"
+
+simple_install  "zsh/alias.zsh"         ".zsh/alias.zsh"
+simple_install  "zsh/completion.zsh"    ".zsh/completion.zsh"
+simple_install  "zsh/options.zsh"       ".zsh/options.zsh"
+simple_install  "zsh/prompt.zsh"        ".zsh/prompt.zsh"
