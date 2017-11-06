@@ -151,6 +151,7 @@ Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 Plug 'Shougo/neocomplete.vim'
 Plug 'sirver/UltiSnips'
 Plug 'szw/vim-tags'
+Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-fugitive'
 Plug 'vhdirk/vim-cmake'
 Plug 'vim-airline/vim-airline'
