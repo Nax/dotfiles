@@ -3,7 +3,7 @@
     eol                 = lf
     autocrlf            = input
 [credential]
-	helper = osxkeychain
+	helper              = store
 [rerere]
     enabled             = 1
     autoupdate          = 1
