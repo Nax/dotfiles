@@ -2,11 +2,11 @@
 # We also start tmux if the parent process is sshd
 if command -v tmux>/dev/null; then
     if [ -z $TMUX ] && [[ ! $TERM == screen* ]] && [[ ! $TERM == tmux* ]]; then
-        exec tmux -2
+        exec tmux -2 new-session -A -s Untitled
     elif [[ "$(uname -o 2>/dev/null)" != "Cygwin" ]]; then
         PARENT=$(ps -o comm= -p $PPID)
         case "$PARENT" in
-            sshd|*/sshd) exec tmux -2 ;;
+            sshd|*/sshd) exec tmux -2 new-session -A -s Untitled ;;
         esac
     fi
 fi
