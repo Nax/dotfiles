@@ -52,6 +52,11 @@ load_path "$HOME/bin"
 load_xenv "/opt/xenv"
 load_xenv "$HOME/.xenv"
 
+if [ -e "$HOME/.cargo/bin" ]; then
+    load_path "$HOME/.cargo/bin"
+    source "$HOME/.cargo/env"
+fi
+
 unset -f load_sysroot
 unset -f load_path
 unset -f load_xenv
