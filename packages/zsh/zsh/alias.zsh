@@ -33,6 +33,11 @@ function gpr {
     git rebase "${branch}"
 }
 
+function dms {
+    host=$1
+    $SHELL -c "eval \$(docker-machine env $host) && exec \$SHELL"
+}
+
 # Ruby
 alias be="bundle exec"
 alias bi="bundle install --path=vendor/bundle"
