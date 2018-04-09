@@ -12,12 +12,6 @@ let g:python_host_skip_check = 1
 let g:python3_host_skip_check = 1
 let g:EditorConfig_core_mode = 'python_external'
 
-if has('mac')
-    let g:clang_library_path = '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
-endif
-let g:clang_auto_select = 1
-let g:clang_complete_auto = 0
-
 let NERDTreeAutoDeleteBuffer = 1
 let NERDTreeQuitOnOpen = 1
 let NERDTreeCaseSensitiveSort = 1
@@ -147,7 +141,9 @@ Plug 'sirver/UltiSnips'
 Plug 'szw/vim-tags'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
+Plug 'valloric/youcompleteme'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-scripts/a.vim'
 Plug 'vim-scripts/xoria256.vim'
@@ -156,7 +152,7 @@ call plug#end()
 set updatetime=250
 
 nnoremap <Space> za
-noremap <silent> <Tab> :NERDTreeToggle<CR>
+noremap <silent> <C-g> :NERDTreeToggle<CR>
 noremap <silent> <leader>. :edit .<CR>
 
 let g:ctrlp_match_window = 'bottom,order:ttb'
