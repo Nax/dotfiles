@@ -39,25 +39,27 @@ OPTIONS=standout
 OPTIONS=use_darkgray
 OPTIONS=fullscreen
 OPTIONS=menucolors
-OPTIONS=statushilites
+OPTIONS=statushilites:10
 
-OPTIONS=hilite_status: gold/30%/yellow/yellow
-OPTIONS=hilite_status: hitpoints/66%/orange/bright-green
-OPTIONS=hilite_status: hitpoints-max/30%/bold/bold
-OPTIONS=hilite_status: power/66%/orange/bright-green
-OPTIONS=hilite_status: power-max/30%/bold/bold
-OPTIONS=hilite_status: hunger/30%/magenta/magenta
-OPTIONS=hilite_status: carrying-capacity/30%/blue/blue
-OPTIONS=hilite_status: condition/30%/red/red
+OPTIONS=hilite_status: gold/always/yellow
+OPTIONS=hilite_status: hitpoints/<100%/lightgreen
+OPTIONS=hilite_status: hitpoints/<60%/yellow
+OPTIONS=hilite_status: hitpoints/<30%/orange
+OPTIONS=hilite_status: hitpoints-max/always/white
+OPTIONS=hilite_status: power/<100%/lightgreen
+OPTIONS=hilite_status: power/<60%/yellow
+OPTIONS=hilite_status: power/<30%/orange
+OPTIONS=hilite_status: power-max/always/white
+OPTIONS=hilite_status: hunger/always/magenta
+OPTIONS=hilite_status: carrying-capacity/always/blue
+OPTIONS=hilite_status: condition/major_troubles/orange
+OPTIONS=hilite_status: condition/minor_troubles/yellow
+OPTIONS=hilite_status: condition/movement/lightcyan
 
-OPTIONS=hilite_status: strength/updown/red/green
-OPTIONS=hilite_status: dexterity/updown/red/green
-OPTIONS=hilite_status: constitution/updown/red/green
-OPTIONS=hilite_status: intelligence/updown/red/green
-OPTIONS=hilite_status: wisdom/updown/red/green
-OPTIONS=hilite_status: charisma/updown/red/green
+OPTIONS=hilite_status: characteristics/up/green
+OPTIONS=hilite_status: characteristics/down/red
 
-OPTIONS=hilite_status: armor-class/30%/bright-cyan/bright-cyan
+OPTIONS=hilite_status: armor-class/always/lightcyan
 
 MENUCOLOR=" !C"=white
 MENUCOLOR=" !B"=white
@@ -137,8 +139,7 @@ MENUCOLOR=" Candelabrum of Invocation"=magenta&bold
 MENUCOLOR=" candelabrum"=magenta&bold
 MENUCOLOR=" Book of the Dead"=magenta&bold
 MENUCOLOR=" papyrus spellbook"=magenta&bold
-
-MENUCOLOR=" Amulet of Yendor named"=magenta&bold&underline
+MENUCOLOR=" Amulet of Yendor named"=magenta&bold
 
 MENUCOLOR=" loadstone"=red&underline
 MENUCOLOR=" cursed .* luckstone"=orange&underline
@@ -163,12 +164,10 @@ MENUCOLOR=" 100% [0-9% -]*"=red
 
 MENUCOLOR="[a-zA-Z] - [a-zA-Z ]+ [0-9]\*   [a-z]+ +[0-9]+%"=magenta
 
-MENUCOLOR=" (unpaid, [0-9]+ zorkmids?)"=underline
-
-MENUCOLOR="^ +[a-z -]+ +\[\(Unskilled\|Basic\|Skilled\|Expert\|Master\|Grand Master\)\]$"=none
+MENUCOLOR="^ +[a-z -]+ +\[\(Unskilled\|Basic\|Skilled\|Expert\|Master\|Grand Master\)\]$"=gray
 MENUCOLOR="^ *[a-z] - +[a-z -]+ +\[\(Unskilled\|Basic\|Skilled\|Expert\|Master\|Grand Master\)\]$"=white
 MENUCOLOR="^ +\* +[a-z -]+ +\[\(Unskilled\|Basic\|Skilled\|Expert\|Master\|Grand Master\)\]$"=white
-MENUCOLOR="^ +# +[a-z -]+ +\[\(Unskilled\|Basic\|Skilled\|Expert\|Master\|Grand Master\)\]$"=none
+MENUCOLOR="^ +# +[a-z -]+ +\[\(Unskilled\|Basic\|Skilled\|Expert\|Master\|Grand Master\)\]$"=gray
 
 SYMBOLS=S_ghost:8
 
