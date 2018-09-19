@@ -3,7 +3,7 @@
     eol                 = lf
     autocrlf            = input
 [credential]
-	helper              = store
+    helper              = store
 [rerere]
     enabled             = 1
     autoupdate          = 1
@@ -47,5 +47,3 @@
     path                = ~/.gitconfig.local
 [alias]
     cloner              = "clone --recursive -j8"
-[merge "ours"]
-	driver = true

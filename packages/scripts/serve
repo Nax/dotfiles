@@ -2,7 +2,7 @@
 
 require 'webrick'
 
-server = WEBrick::HTTPServer.new(:Port => 8000, :DocumentRoot => Dir.pwd)
+server = WEBrick::HTTPServer.new(:BindAddress => '::', :Port => 8000, :DocumentRoot => Dir.pwd)
 
 trap "SIGINT" do
     server.stop
