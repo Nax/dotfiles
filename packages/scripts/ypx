@@ -1,0 +1,6 @@
+#!/bin/sh
+
+package_name=$1
+tmp_dir="$(mktemp -d)"
+(cd $tmp_dir; yarn add $package_name) && (PATH="$tmp_dir/node_modules/.bin:$PATH"; "$@")
+rm -rf $tmp_dir

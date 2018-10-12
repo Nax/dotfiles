@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
 simple_install "serve" "bin/serve"
+simple_install "ypx" "bin/ypx"
