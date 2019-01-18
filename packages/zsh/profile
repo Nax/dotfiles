@@ -17,7 +17,11 @@ load_sysroot() {
     if [ -e "$1" ]; then
         export PATH="$1/bin:$PATH"
         export PATH="$1/sbin:$PATH"
-        export LIBRARY_PATH="$1/lib:$LIBRARY_PATH"
+        if [ -z "$LIBRARY_PATH" ]; then
+            export LIBRARY_PATH="$1/lib"
+        else
+            export LIBRARY_PATH="$1/lib:$LIBRARY_PATH"
+        fi
         export MANPATH="$1/share/man:$MANPATH"
         if [ -z "$CPATH" ]; then
             export CPATH="$1/include"
@@ -42,8 +46,8 @@ load_sysroot /opt/local
 load_sysroot /usr/local
 load_sysroot "$HOME/.ports"
 
-if [ -e "/opt/cross/bin" ]; then
-    load_path "/opt/cross/bin"
+if [ -e "/usr/local/cross" ]; then
+    load_sysroot "/usr/local/cross"
 fi
 
 load_path "$HOME/.bin"
