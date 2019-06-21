@@ -57,10 +57,15 @@ load_path "$HOME/.yarn/bin"
 load_xenv "/opt/xenv"
 load_xenv "$HOME/.xenv"
 
+# Cargo
 if [ -e "$HOME/.cargo/bin" ]; then
     load_path "$HOME/.cargo/bin"
     source "$HOME/.cargo/env"
 fi
+
+# Yarn
+load_path "$HOME/.yarn/bin"
+load_path "$HOME/.config/yarn/global/node_modules/.bin"
 
 unset -f load_sysroot
 unset -f load_path
