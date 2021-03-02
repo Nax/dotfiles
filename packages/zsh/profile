@@ -7,8 +7,6 @@ if [ -f /etc/profile ]; then
     source /etc/profile
 fi
 
-export LANG=en_US.UTF-8
-
 if [ -x /usr/libexec/path_helper ]; then
     PATH=""
     eval `/usr/libexec/path_helper -s`
@@ -50,8 +48,13 @@ load_sysroot /opt/local
 load_sysroot /usr/local
 load_sysroot "$HOME/.ports"
 
+# Common location for cross compilers
 if [ -e "/usr/local/cross" ]; then
     load_sysroot "/usr/local/cross"
+fi
+
+if [ -e "/opt/cross" ]; then
+    load_sysroot "/opt/cross"
 fi
 
 load_path "$HOME/.bin"
