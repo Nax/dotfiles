@@ -9,11 +9,6 @@ precmd() {
         fi
         vcs_segment=" %F{yellow}$vcs_segment"
     fi
-    if [ "${DOCKER_MACHINE_NAME}x" = "x" ]; then
-        docker_machine=""
-    else
-        docker_machine=" %F{red}$DOCKER_MACHINE_NAME"
-    fi
 }
 
 if [ "$EUID" = 0 ]; then
@@ -22,7 +17,7 @@ else
     user_color="green"
 fi
 
-PROMPT="%B%F{$user_color}%n%F{white}@%F{blue}%m %F{magenta}%5~\${vcs_segment}\${docker_machine}%F{white} %# %b%f%k"
+PROMPT="%B%F{$user_color}%n%F{white}@%F{blue}%m %F{magenta}%5~\${vcs_segment}%F{white} %# %b%f%k"
 RPROMPT="%(?..%B%F{white}%K{196} %? %b%f%k)"
 ZLE_RPROMPT_INDENT=-1
 

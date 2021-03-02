@@ -43,7 +43,7 @@ export PAGER=$(find_variant most less more)
 export VISUAL=$(find_variant nvim vim vi)
 export EDITOR="$VISUAL"
 
-source "$HOME/.zsh/options.zsh"
-source "$HOME/.zsh/alias.zsh"
-source "$HOME/.zsh/completion.zsh"
-source "$HOME/.zsh/prompt.zsh"
+source "$HOME/.config/zsh/options.zsh"
+source "$HOME/.config/zsh/alias.zsh"
+source "$HOME/.config/zsh/completion.zsh"
+source "$HOME/.config/zsh/prompt.zsh"

@@ -33,26 +33,10 @@ function gpr {
     git rebase "${branch}"
 }
 
-function dms {
-    host=$1
-    $SHELL -c "eval \$(docker-machine env $host) && exec \$SHELL"
-}
-
 # Ruby
 alias be="bundle exec"
 alias bi="bundle install --path=vendor/bundle"
 
-# Heroku
-alias hrc="heroku run bin/rails console"
-
-if command -v brew >/dev/null 2>&1; then
-    alias bupdate="brew update && brew upgrade && brew cleanup"
-fi
-
-if command -v vs_env >/dev/null 2>&1; then
-    alias vs_env32="vs_env x86 "
-    alias vs_env64="vs_env x64 "
-fi
-
+# Redo completion for commands wrapping other commands
 alias sudo="sudo "
 alias env="env "

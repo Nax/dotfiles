@@ -16,8 +16,8 @@ setopt RM_STAR_SILENT
 setopt NO_BGNICE
 setopt NO_BEEP
 
-HISTFILE="$HOME/.zsh_history"
+HISTFILE="$HOME/.cache/zsh/history"
 HISTSIZE=10000
 SAVEHIST=10000
 
-bindkey -v
+bindkey -e
