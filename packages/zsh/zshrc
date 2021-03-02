@@ -1,3 +1,6 @@
+# Force the locale to American English (UTF-8)
+export LANG=en_US.UTF-8
+
 # If we're not inside tmux, then start tmux
 # We also start tmux if the parent process is sshd
 if command -v tmux>/dev/null; then
