@@ -2,6 +2,16 @@
 # Nax's config
 # Inspired by https://github.com/Tolchi/dotfile/blob/master/nethackrc
 
+OPTIONS=windowtype:curses
+OPTIONS=symset:curses
+OPTIONS=windowborders:2
+OPTIONS=align_message:right
+
+OPTIONS=autodig
+OPTIONS=autopickup
+OPTIONS=autoopen
+OPTIONS=!autoquiver
+
 OPTIONS=name:Nax
 OPTIONS=hilite_pet
 OPTIONS=pettype:cat
@@ -9,7 +19,6 @@ OPTIONS=catname:Poutu
 OPTIONS=dogname:Beowulf
 OPTIONS=horsename:Findus
 OPTIONS=fruit:watermelon
-OPTIONS=autopickup
 OPTIONS=pickup_types:$?!/="%*
 OPTIONS=disclose:+i +a +g +c +v +o
 OPTIONS=!cmdassist
@@ -17,7 +26,6 @@ OPTIONS=!help
 OPTIONS=!legacy
 OPTIONS=!news
 OPTIONS=suppress_alert:3.6.0
-OPTIONS=autodig
 OPTIONS=!lootabc
 OPTIONS=msg_window:reverse
 OPTIONS=msghistory:2000
@@ -28,9 +36,8 @@ OPTIONS=showscore
 OPTIONS=time
 OPTIONS=runmode:teleport
 OPTIONS=!rest_on_space
-OPTIONS=paranoid_confirmation:none
+OPTIONS=paranoid_confirmation:quit die bones attack wand-break Were-change Remove
 OPTIONS=number_pad:0
-OPTIONS=boulder:0
 OPTIONS=pickup_burden:unencumbered
 OPTIONS=sortloot:loot:all
 OPTIONS=scores:10 top/3 around/own
@@ -169,7 +176,10 @@ MENUCOLOR="^ *[a-z] - +[a-z -]+ +\[\(Unskilled\|Basic\|Skilled\|Expert\|Master\|
 MENUCOLOR="^ +\* +[a-z -]+ +\[\(Unskilled\|Basic\|Skilled\|Expert\|Master\|Grand Master\)\]$"=white
 MENUCOLOR="^ +# +[a-z -]+ +\[\(Unskilled\|Basic\|Skilled\|Expert\|Master\|Grand Master\)\]$"=gray
 
+SYMBOLS=S_boulder:0
 SYMBOLS=S_ghost:8
+SYMBOLS=S_corr:#
+SYMBOLS=S_litcorr:#
 
 MSGTYPE=stop "The couatl swings itself around you!"
 MSGTYPE=stop "The electric eel swings itself around you!"
@@ -223,8 +233,6 @@ AUTOPICKUP_EXCEPTION="<touchstone"
 AUTOPICKUP_EXCEPTION=">rock[^<]*$"
 AUTOPICKUP_EXCEPTION=">stone[^<]*$"
 
-AUTOPICKUP_EXCEPTION="<wand of wishing"
-AUTOPICKUP_EXCEPTION="<wand called wish"
 AUTOPICKUP_EXCEPTION="<wand of create monster"
 AUTOPICKUP_EXCEPTION="<wand of teleportation"
 AUTOPICKUP_EXCEPTION="<wand called tele"
@@ -234,23 +242,15 @@ AUTOPICKUP_EXCEPTION="<wand of fire"
 AUTOPICKUP_EXCEPTION="<wand of lightning"
 AUTOPICKUP_EXCEPTION="<wand of death"
 AUTOPICKUP_EXCEPTION=">wand of cold[^<]*$"
-AUTOPICKUP_EXCEPTION="<magic marker"
-AUTOPICKUP_EXCEPTION="< lamp"
-AUTOPICKUP_EXCEPTION="> oil lamp [^<]*$"
-AUTOPICKUP_EXCEPTION="> lamp called oil[^<]*$"
-AUTOPICKUP_EXCEPTION="<amulet of life saving"
-AUTOPICKUP_EXCEPTION="<amulet called life"
+AUTOPICKUP_EXCEPTION="<lamp"
+AUTOPICKUP_EXCEPTION=">oil lamp [^<]*$"
+AUTOPICKUP_EXCEPTION=">lamp called oil[^<]*$"
 AUTOPICKUP_EXCEPTION="<athame"
 
 AUTOPICKUP_EXCEPTION=">:0)"
 AUTOPICKUP_EXCEPTION="> named empty"
 AUTOPICKUP_EXCEPTION=">wand of nothing"
 AUTOPICKUP_EXCEPTION="> called nothing"
-
-AUTOPICKUP_EXCEPTION="<full healing"
-AUTOPICKUP_EXCEPTION="<extra healing"
-AUTOPICKUP_EXCEPTION="<healing"
-AUTOPICKUP_EXCEPTION="<gain level"
 
 AUTOPICKUP_EXCEPTION="<[^| ]the "
 
@@ -308,3 +308,22 @@ AUTOPICKUP_EXCEPTION="<mud boots"
 AUTOPICKUP_EXCEPTION="<buckled boots"
 AUTOPICKUP_EXCEPTION="<riding boots"
 AUTOPICKUP_EXCEPTION="<snow boots"
+
+# Reset (geno games)
+AUTOPICKUP_EXCEPTION=">.*"
+
+# Too good to miss
+AUTOPICKUP_EXCEPTION="<wand .* wish"
+AUTOPICKUP_EXCEPTION="<magic lamp"
+AUTOPICKUP_EXCEPTION="<lamp .* magic"
+AUTOPICKUP_EXCEPTION="<magic marker"
+AUTOPICKUP_EXCEPTION="<potion .* healing"
+AUTOPICKUP_EXCEPTION="<potion .* gain"
+AUTOPICKUP_EXCEPTION="<amulet .* life"
+AUTOPICKUP_EXCEPTION="<genocide"
+
+# Allow overrides
+AUTOPICKUP_EXCEPTION="<<"
+AUTOPICKUP_EXCEPTION=">>"
+AUTOPICKUP_EXCEPTION="< named .*<"
+AUTOPICKUP_EXCEPTION="> named .*>"
