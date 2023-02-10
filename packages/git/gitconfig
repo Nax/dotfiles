@@ -21,6 +21,8 @@
     showUntrackedFiles  = all
 [user]
     useConfigOnly       = true
+    name                = Nax
+    email               = max@bacoux.com
 [color]
     ui                  = always
 [color "branch"]
@@ -52,5 +54,7 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[diff]
+    algorithm = histogram
 [init]
 	defaultBranch = master
