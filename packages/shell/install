@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+simple_install  "alias.sh"     ".config/shell/alias.sh"
+simple_install  "rc.sh"        ".config/shell/rc.sh"
