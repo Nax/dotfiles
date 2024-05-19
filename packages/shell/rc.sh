@@ -30,9 +30,13 @@ if [ -e "$HOME/.dotfiles/bin" ]; then
     export PATH="$HOME/.dotfiles/bin:$PATH"
 fi
 
+command_exists() {
+    command -v "$1" >/dev/null 2>&1
+}
+
 find_variant() {
     for p in "$@"; do
-        if command -v "$p" >/dev/null 2>&1; then
+        if command_exists "$p"; then
             echo $p
             return
         fi
@@ -43,7 +47,11 @@ export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
 export LS_COLORS="di=1;34:ln=1;35:so=1;31:pi=1;33:ex=1;32:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43"
 export PAGER=$(find_variant most less more)
-export VISUAL=$(find_variant code nvim vim vi)
+if command_exists "code"; then
+    export VISUAL="code --wait"
+else
+    export VISUAL=$(find_variant nvim vim vi)
+fi
 export EDITOR="$VISUAL"
 
 source "$HOME/.config/shell/alias.sh"
