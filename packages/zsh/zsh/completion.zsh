@@ -1,3 +1,8 @@
+# ASDF
+if [ ! -z "$ASDF_HOME" ]; then
+    fpath=($ASDF_HOME/completions $fpath)
+fi
+
 autoload -U colors && colors
 autoload -U compinit && compinit -u
 zstyle ':completion:*' menu select

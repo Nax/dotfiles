@@ -74,6 +74,12 @@ fi
 load_path "$HOME/.yarn/bin"
 load_path "$HOME/.config/yarn/global/node_modules/.bin"
 
+# ASDF
+if [ -e "$HOME/.asdf" ]; then
+    export ASDF_HOME="$HOME/.asdf"
+    source "$ASDF_HOME/asdf.sh"
+fi
+
 unset -f load_sysroot
 unset -f load_path
 unset -f load_xenv
