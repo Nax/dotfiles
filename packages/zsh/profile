@@ -80,6 +80,12 @@ if [ -e "$HOME/.asdf" ]; then
     source "$ASDF_HOME/asdf.sh"
 fi
 
+# EMSDK
+if [ -e "$HOME/.emsdk" ]; then
+    export EMSDK_QUIET=1
+    source "$HOME/.emsdk/emsdk_env.sh"
+fi
+
 unset -f load_sysroot
 unset -f load_path
 unset -f load_xenv
