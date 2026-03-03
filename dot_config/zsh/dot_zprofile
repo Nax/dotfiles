@@ -1,0 +1,2 @@
+typeset -aU path
+set -o nullglob

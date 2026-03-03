@@ -1,0 +1,129 @@
+# Auto-start tmux
+if command -v tmux>/dev/null; then
+    if [ -z $TMUX ] && [[ ! $TERM == screen* ]] && [[ ! $TERM == tmux* ]] && [[ ! $TERM_PROGRAM == vscode ]]; then
+        exec tmux -2 new-session -A -s Untitled
+    fi
+fi
+
+# Basic interactive env
+export CLICOLOR=1
+export LSCOLORS=ExFxBxDxCxegedabagacad
+export LS_COLORS="di=1;34:ln=1;35:so=1;31:pi=1;33:ex=1;32:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43"
+
+# LS aliases
+ls_default="ls"
+
+if ls --color=auto &> /dev/null; then
+    ls_default="$ls_default --color=auto"
+    alias ls="$ls_default"
+fi
+
+alias ls="$ls_default -Fh"
+alias l="$ls_default -laFh"
+alias ll="$ls_default -lFh"
+
+unset ls_default
+
+# Git aliases
+alias g="git"
+alias gs="git status"
+alias gc="git commit"
+alias gcm="git commit -m"
+alias gca="git commit --amend"
+alias gb="git branch"
+alias gr="git rebase"
+alias gri="git rebase -i"
+alias gco="git checkout"
+alias gcb="git checkout -b"
+alias gff="git merge --ff"
+
+function gpr {
+    local current_branch="$(git rev-parse --abbrev-ref HEAD)"
+    local branch=${1:-master}
+    git checkout "${branch}"
+    git pull
+    git checkout "${current_branch}"
+    git rebase "${branch}"
+}
+
+# Redo completion for commands wrapping other commands
+alias sudo="sudo "
+alias env="env "
+
+# Options
+setopt APPEND_HISTORY
+setopt AUTOCD
+setopt AUTO_LIST
+setopt EXTENDED_HISTORY
+setopt GLOB_DOTS
+setopt HASH_LIST_ALL
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_REDUCE_BLANKS
+setopt INC_APPEND_HISTORY
+setopt NULLGLOB
+setopt PROMPT_SUBST
+setopt PUSHD_SILENT
+setopt SHARE_HISTORY
+setopt RM_STAR_SILENT
+setopt NO_BGNICE
+setopt NO_BEEP
+
+mkdir -p "$HOME/.cache/zsh"
+HISTFILE="$HOME/.cache/zsh/history"
+HISTSIZE=10000
+SAVEHIST=10000
+
+bindkey -e
+
+# Prompt
+precmd() {
+    vcs_segment=""
+    git_branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+    if [ ! -z "$git_branch" ]; then
+        vcs_segment="$git_branch"
+        git_status=$(git status --porcelain)
+        if [ ! -z "$git_status" ]; then
+            vcs_segment="$vcs_segment*"
+        fi
+        vcs_segment=" %F{yellow}$vcs_segment"
+    fi
+}
+
+if [ "$EUID" = 0 ]; then
+    user_color="red"
+else
+    user_color="green"
+fi
+
+PROMPT="%B%F{$user_color}%n%F{white}@%F{blue}%m %F{magenta}%5~\${vcs_segment}%F{white} %# %b%f%k"
+RPROMPT="%(?..%B%F{white}%K{196} %? %b%f%k)"
+ZLE_RPROMPT_INDENT=-1
+
+unset user_color
+
+# Completion
+if [ ! -z "$ASDF_HOME" ]; then
+    fpath=($ASDF_HOME/completions $fpath)
+fi
+
+autoload -U colors && colors
+autoload -U compinit && compinit -u
+zstyle ':completion:*' menu select
+zstyle ':completion:*' completer _complete _prefix
+zstyle ':completion:*' add-space true
+
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ":completion:*:commands" rehash 1
+
+zstyle ':completion:*:*:*:*:processes' menu yes select
+zstyle ':completion:*:*:*:*:processes' force-list always
+zstyle ':completion:*:*:*:*:processes' command 'ps -A -o pid,user,command'
+zstyle ':completion:*:*:*:*:processes' list-colors "=(#b) #([0-9]#)*=0=${color[green]}"
+zstyle ':completion:*:*:kill:*:processes' command 'ps -e -o pid,user,tty,command'
+
+zstyle ':completion:*:processes-names' command "ps -eo command= | sed 's:\([^ ]*\).*:\1:;s:\(/[^ ]*/\)::;/^\[/d'"
+
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*:warnings' format '%BSorry, no matches for: %d%b'
+zstyle ':completion:*:functions' ignored-patterns '_*'

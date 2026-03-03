@@ -1,0 +1,78 @@
+# Guard against double-sourcing
+if [ -n "$_PROFILE_LOADED" ]; then return; fi
+export _PROFILE_LOADED=1
+
+# Env reset
+unset CPATH
+unset LIBRARY_PATH
+unset MANPATH
+
+# Source system profile
+if [ -f /etc/profile ]; then
+    . /etc/profile
+fi
+
+# macOS path helper
+if [ -x /usr/libexec/path_helper ]; then
+    PATH=""
+    eval $(/usr/libexec/path_helper -s)
+fi
+
+load_sysroot() {
+    if [ -e "$1" ]; then
+        export PATH="$1/bin:$PATH"
+        export PATH="$1/sbin:$PATH"
+        if [ -z "$LIBRARY_PATH" ]; then
+            export LIBRARY_PATH="$1/lib"
+        else
+            export LIBRARY_PATH="$1/lib:$LIBRARY_PATH"
+        fi
+        export MANPATH="$1/share/man:$MANPATH"
+        if [ -z "$CPATH" ]; then
+            export CPATH="$1/include"
+        else
+            export CPATH="$1/include:$CPATH"
+        fi
+    fi
+}
+
+load_path() {
+    [ -e "$1" ] && export PATH="$1:$PATH"
+}
+
+find_variant() {
+    for p in "$@"; do
+        command -v "$p" >/dev/null 2>&1 && echo "$p" && return
+    done
+}
+
+# Common sysroots
+load_sysroot /usr/local
+load_sysroot /usr/local/cross
+load_sysroot /opt/local
+load_sysroot /opt/cross
+
+# EMSDK
+if [ -e "$HOME/.emsdk" ]; then
+    export EMSDK_QUIET=1
+    . "$HOME/.emsdk/emsdk_env.sh"
+fi
+
+# ASDF
+load_path "$HOME/.asdf/shims"
+
+# Common config
+export LANG=en_US.UTF-8
+export PAGER=$(find_variant most less more)
+export VISUAL=$(find_variant code nvim vim vi)
+if [ "$VISUAL" = "code" ]; then
+    export VISUAL="code --wait"
+fi
+export EDITOR="$VISUAL"
+
+unset -f load_sysroot
+unset -f load_path
+unset -f find_variant
+
+# Source local profile if it exists
+[ -e "$HOME/.profile.local" ] && . "$HOME/.profile.local"
