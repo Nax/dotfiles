@@ -51,7 +51,6 @@ alias sudo="sudo "
 alias env="env "
 
 # Options
-setopt APPEND_HISTORY
 setopt AUTOCD
 setopt AUTO_LIST
 setopt EXTENDED_HISTORY
