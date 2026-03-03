@@ -59,7 +59,12 @@ if [ -e "$HOME/.emsdk" ]; then
 fi
 
 # ASDF
-load_path "$HOME/.asdf/shims"
+asdf_data_dir="$HOME/.asdf"
+if [ -d "$asdf_data_dir" ]; then
+    export ASDF_DATA_DIR="$asdf_data_dir"
+    load_path "$asdf_data_dir/shims"
+fi
+unset asdf_data_dir
 
 # Common config
 export LANG=en_US.UTF-8

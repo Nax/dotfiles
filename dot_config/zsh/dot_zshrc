@@ -122,8 +122,8 @@ ZLE_RPROMPT_INDENT=-1
 unset user_color
 
 # Completion
-if [ ! -z "$ASDF_HOME" ]; then
-    fpath=($ASDF_HOME/completions $fpath)
+if [ ! -z "$ASDF_DATA_DIR" ]; then
+    fpath=($ASDF_DATA_DIR/completions $fpath)
 fi
 
 autoload -U colors && colors
