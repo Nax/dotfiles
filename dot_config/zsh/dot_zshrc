@@ -126,7 +126,6 @@ if [ ! -z "$ASDF_DATA_DIR" ]; then
     fpath=($ASDF_DATA_DIR/completions $fpath)
 fi
 
-autoload -U colors && colors
 autoload -U compinit && compinit -u
 zstyle ':completion:*' menu select
 zstyle ':completion:*' completer _complete _prefix
