@@ -77,15 +77,34 @@ SAVEHIST=10000
 bindkey -e
 
 # Prompt
+# _vcs_query sets $vcs_branch and $vcs_dirty for the current directory.
+# Uses gitstatus daemon if available (fast), otherwise falls back to git.
+# Install gitstatus: git clone https://github.com/romkatv/gitstatus ~/.gitstatus
+if [[ -f "$HOME/.gitstatus/gitstatus.plugin.zsh" ]]; then
+    source "$HOME/.gitstatus/gitstatus.plugin.zsh"
+    gitstatus_start MY_PROMPT
+    _vcs_query() {
+        vcs_branch=""
+        vcs_dirty=0
+        if gitstatus_query -t 0.5 MY_PROMPT && [[ "$VCS_STATUS_RESULT" == ok-sync ]]; then
+            vcs_branch="$VCS_STATUS_LOCAL_BRANCH"
+            (( VCS_STATUS_HAS_STAGED || VCS_STATUS_HAS_UNSTAGED || VCS_STATUS_HAS_UNTRACKED )) && vcs_dirty=1
+        fi
+    }
+else
+    _vcs_query() {
+        vcs_branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+        vcs_dirty=0
+        [[ -n "$vcs_branch" && -n "$(git status --porcelain)" ]] && vcs_dirty=1
+    }
+fi
+
 precmd() {
     vcs_segment=""
-    git_branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
-    if [ ! -z "$git_branch" ]; then
-        vcs_segment="$git_branch"
-        git_status=$(git status --porcelain)
-        if [ ! -z "$git_status" ]; then
-            vcs_segment="$vcs_segment*"
-        fi
+    _vcs_query
+    if [[ -n "$vcs_branch" ]]; then
+        vcs_segment="$vcs_branch"
+        (( vcs_dirty )) && vcs_segment="$vcs_segment*"
         vcs_segment=" %F{yellow}$vcs_segment"
     fi
 }
